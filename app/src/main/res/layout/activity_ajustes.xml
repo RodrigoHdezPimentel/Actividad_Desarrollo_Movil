@@ -110,14 +110,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="382dp" />
+        app:layout_constraintGuide_begin="354dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="478dp" />
+        app:layout_constraintGuide_begin="444dp" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -147,25 +147,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="567dp" />
+        app:layout_constraintGuide_begin="519dp" />
 
     <Button
         android:id="@+id/ingles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#D7E1D7"
         android:text="Ingles"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
     <Button
-        android:backgroundTint="@color/button_green"
         android:id="@+id/espanol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#D7E1D7"
         android:text="Español"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toEndOf="@+id/ingles"
         app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toMain"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="612dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
