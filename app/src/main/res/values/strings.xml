@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MiAplicacionXD</string>
+    <string name="click_to_start">Click to Start</string>
+    <string name="buscar">Buscar</string>
+    <string name="textview">TextView</string>
+    <string name="registers">Registers</string>
+    <string name="button">Button</string>
+    <string name="go_main">Go Main</string>
+    <string name="prueba">Prueba</string>
+    <string name="email">Email</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="name">Name</string>
+    <string name="logo_del_la_aplicacion_un_topo">Logo del la aplicacion, un topo</string>
+    <string name="nickname">Nickname</string>
+    <string name="username">UserName</string>
+    <string name="pruebas">Pruebas</string>
+    <string name="modificar">Modificar</string>
+</resources>

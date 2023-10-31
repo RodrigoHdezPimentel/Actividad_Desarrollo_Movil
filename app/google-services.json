@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "963193667967",
+    "project_id": "damapp1programmultimedia",
+    "storage_bucket": "damapp1programmultimedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963193667967:android:049a5d8b59f2bf5acc5a4a",
+        "android_client_info": {
+          "package_name": "com.example.miaplicacionxd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjLy9yDQWeALGl3nsWLiffZwJF_tb6dYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
