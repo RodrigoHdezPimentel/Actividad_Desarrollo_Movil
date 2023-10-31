@@ -4,116 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Insertar">
-
-    <Button
-        android:id="@+id/ToMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="changeToMain"
-        android:text="To Main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
-
-    <Button
-        android:id="@+id/InsertButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="InsertValues"
-        android:text="Insert"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
-    <Button
-        android:id="@+id/insertButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="DeleteValues"
-        android:text="Delete"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+    tools:context=".Insertar"
+android:background="@color/background_ligth_green"
+    >
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/Text_Hori_In"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.88" />
+
+        app:layout_constraintGuide_percent="0.58" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/Boton_Hori_In"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.22" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7" />
 
-    <EditText
-        android:id="@+id/DB_Surname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Apellido"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-    <EditText
-        android:id="@+id/DB_Name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
+        android:id="@+id/Text_Hori_S"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.23" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
+        android:id="@+id/Text_Hori_M"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <EditText
+        android:id="@+id/DB_Email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Text_Hori_In"
+        app:layout_constraintEnd_toStartOf="@+id/Text_Vert_D"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/Text_Vert_I"
+        app:layout_constraintTop_toTopOf="@+id/Text_Hori_M"
+        app:layout_constraintVertical_bias="0.473"
+        tools:text="@string/email" />
+
+    <EditText
+        android:id="@+id/DB_UserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Text_Hori_M"
+        app:layout_constraintEnd_toStartOf="@+id/Text_Vert_D"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Text_Vert_I"
+        app:layout_constraintTop_toTopOf="@+id/Text_Hori_S" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Text_Vert_D"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.85" />
 
-    <Button
-        android:id="@+id/ToShow"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Boton_Vert_D"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="changeToShow"
-        android:text="To Show"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Boton_Vert_I"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Text_Vert_I"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <Button
+
+        android:id="@+id/Insert_Datos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_green"
+        android:text="Confirmar"
+        app:layout_constraintBottom_toTopOf="@+id/Boton_Hori_In"
+        app:layout_constraintEnd_toStartOf="@+id/Boton_Vert_D"
+        app:layout_constraintStart_toStartOf="@+id/Boton_Vert_I"
+        app:layout_constraintTop_toTopOf="@+id/Text_Hori_In" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentToMenu);
     }
 
-    public void changeToInsert(){
+    public void changeToInsert(View view){
         Intent nuevoIntent = new Intent(MainActivity.this, Insertar.class);
         startActivity(nuevoIntent);
     }
