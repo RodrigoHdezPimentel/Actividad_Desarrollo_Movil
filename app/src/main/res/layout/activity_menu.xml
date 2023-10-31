@@ -14,10 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.81" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/ImgFondo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
         android:id="@+id/ProfileImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/LimitImgProfile"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline22" />
 
     <Button
-        android:id="@+id/CountBut"
+        android:id="@+id/AcountBut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Cuenta"
@@ -106,6 +106,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
