@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +20,18 @@ import java.util.Map;
 import java.util.Random;
 
 public class Insertar extends AppCompatActivity {
-    Random rm = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar);
+        
+        Button insert = findViewById(R.id.Insert_Datos);
+        insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertValues();
+            }
+        });
     }
 
     public void changeToMain(View view) {
@@ -31,8 +39,9 @@ public class Insertar extends AppCompatActivity {
         startActivity(nuevoIntent);
     }
 
+
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-    public void InsertValues(View v) {
+    public void InsertValues() {
         //Leemos variables
         TextView UsernameTextView = findViewById(R.id.DB_UserName);
         TextView EmailTextView = findViewById(R.id.DB_Email);
@@ -42,15 +51,15 @@ public class Insertar extends AppCompatActivity {
         user.put("Email", EmailTextView.getText().toString());
 
         firestoreDB.collection("Usuarios")
-                .document(UsernameTextView.getText() + "_" + EmailTextView.getText())
-                .set(UsernameTextView.getText().toString())
+                .document(UsernameTextView.getText().toString())
+                .set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(Insertar.this, "Insertado correctamente", Toast.LENGTH_SHORT).show();
                         Log.d("_Debug", "TODO ON");
                         UsernameTextView.setText("");
-                       EmailTextView.setText("");
+                        EmailTextView.setText("");
                        changeToMain();              //despues de ingresar los datos, lo envió al main
                     }
                 }).addOnFailureListener(new OnFailureListener() {
