@@ -49,7 +49,7 @@ android:background="@color/background_ligth_green"
         app:layout_constraintEnd_toStartOf="@+id/Text_Vert_D"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/Text_Vert_I"
-        app:layout_constraintTop_toTopOf="@+id/Text_Hori_M"
+        app:layout_constraintTop_toBottomOf="@+id/DB_UserName"
         app:layout_constraintVertical_bias="0.473"
         tools:text="@string/email" />
 
@@ -106,5 +106,19 @@ android:background="@color/background_ligth_green"
         app:layout_constraintEnd_toStartOf="@+id/Boton_Vert_D"
         app:layout_constraintStart_toStartOf="@+id/Boton_Vert_I"
         app:layout_constraintTop_toTopOf="@+id/Text_Hori_In" />
+
+    <TextView
+        android:id="@+id/ErrorText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="ERROR"
+        android:textAlignment="center"
+        android:textColor="@color/error"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Text_Hori_In"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DB_Email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

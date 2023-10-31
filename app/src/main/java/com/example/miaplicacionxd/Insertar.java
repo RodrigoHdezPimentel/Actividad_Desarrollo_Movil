@@ -3,6 +3,7 @@ package com.example.miaplicacionxd;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,20 +12,29 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.util.Objects;
 
 public class Insertar extends AppCompatActivity {
+    FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+    TextView error;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar);
-        
+
+        error = findViewById(R.id.ErrorText);
+        error.setVisibility(View.INVISIBLE);
+
         Button insert = findViewById(R.id.Insert_Datos);
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,48 +44,80 @@ public class Insertar extends AppCompatActivity {
         });
     }
 
-    public void changeToMain(View view) {
-        Intent nuevoIntent = new Intent(Insertar.this, MainActivity.class);
-        startActivity(nuevoIntent);
-    }
-
-
-    FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+    @SuppressLint("SetTextI18n")
     public void InsertValues() {
         //Leemos variables
         TextView UsernameTextView = findViewById(R.id.DB_UserName);
         TextView EmailTextView = findViewById(R.id.DB_Email);
 
-        Map<String, String> user = new HashMap<>();
-        user.put("Username", UsernameTextView.getText().toString());
-        user.put("Email", EmailTextView.getText().toString());
+        if (registroEncontrado(UsernameTextView)) {
+            if (EmailTextView.getText().toString().equals("")
+                    || UsernameTextView.getText().toString().equals("")) {
+                error.setVisibility(View.VISIBLE);
+                error.setText("RELLENE TODOS LOS CAMPOS");
+            } else {
+                Map<String, String> user = new HashMap<>();
+                user.put("Username", UsernameTextView.getText().toString());
+                user.put("Email", EmailTextView.getText().toString());
+
+                firestoreDB.collection("Usuarios")
+                        .document(UsernameTextView.getText().toString())
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                //error.setVisibility(View.INVISIBLE);
+                                Toast.makeText(Insertar.this, "Insertado correctamente", Toast.LENGTH_SHORT).show();
+                                Log.d("_Debug", "TODO ON");
+                                UsernameTextView.setText("");
+                                EmailTextView.setText("");
+                                changeToMain();              //despues de ingresar los datos, lo envió al main
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //error.setVisibility(View.VISIBLE);
+                                //error.setText("ERROR EN LA CONEXION A LA BASE DE DATOS");
+                                Toast.makeText(Insertar.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }else{
+                error.setVisibility(View.VISIBLE);
+                error.setText("NOMBRE DE USUARIO YA EXISTENTE");
+        }
+
+    }
+    public boolean registroEncontrado(TextView tv) {
+        final boolean[] encontrado = {false};
 
         firestoreDB.collection("Usuarios")
-                .document(UsernameTextView.getText().toString())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(Insertar.this, "Insertado correctamente", Toast.LENGTH_SHORT).show();
-                        Log.d("_Debug", "TODO ON");
-                        UsernameTextView.setText("");
-                        EmailTextView.setText("");
-                       changeToMain();              //despues de ingresar los datos, lo envió al main
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (Objects.equals(document.get("Username"), tv.getText().toString())) {
+                                    encontrado[0] = true;
+                                    break;
+                                }
+
+                            }
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Insertar.this, "Error", Toast.LENGTH_SHORT).show();
-                        Log.d("ERROR", e.getMessage());
+                        Toast.makeText(Insertar.this, "ERROR EN LA CONEXION", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        return encontrado[0];
     }
-
-
-    public void changeToMain(){
+    public void changeToMain() {
         Intent nuevoIntent = new Intent(Insertar.this, MainActivity.class);
         startActivity(nuevoIntent);
     }
 }
-
-
