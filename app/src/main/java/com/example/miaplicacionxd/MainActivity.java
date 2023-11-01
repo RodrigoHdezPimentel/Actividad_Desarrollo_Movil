@@ -82,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intentToMenu = new Intent(MainActivity.this, menu.class);
         startActivity(intentToMenu);
     }
-
+    public void goToShowCuenta(View view){
+        Intent intentToMenu = new Intent(MainActivity.this,showCuenta.class);
+        startActivity(intentToMenu);
+    }
     public void toPrueba(){
         Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
         startActivity(FBIntent);
