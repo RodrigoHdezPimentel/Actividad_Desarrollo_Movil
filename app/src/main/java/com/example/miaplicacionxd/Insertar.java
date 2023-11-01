@@ -43,8 +43,8 @@ public class Insertar extends AppCompatActivity {
                 InsertValues();
             }
         });
-        Button backBut = findViewById(R.id.backBut);
-        backBut.setOnClickListener(new View.OnClickListener() {
+        Button cancel = findViewById(R.id.Cancelar);
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeToMain();
