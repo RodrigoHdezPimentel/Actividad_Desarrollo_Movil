@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Ajustes"
     android:background="@color/background_green">
+    <ImageView
+        android:id="@+id/Fondo_topo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0.2"
+        app:srcCompat="@drawable/topomadriguera" />
 
     <TextView
         android:id="@+id/Ajustes"
@@ -176,6 +186,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
