@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         EditText nameText = findViewById(R.id.nameText);
         Button Login = findViewById(R.id.Login);
         Button register = findViewById(R.id.Register);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent nuevoIntent = new Intent(MainActivity.this, Insertar.class);
+                startActivity(nuevoIntent);
+            }
+        });
 
         firestoreDB.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -82,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intentToMenu = new Intent(MainActivity.this, menu.class);
         startActivity(intentToMenu);
     }
-
+    
     public void toPrueba(){
         Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
         startActivity(FBIntent);
