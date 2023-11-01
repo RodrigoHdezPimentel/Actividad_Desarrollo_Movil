@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         boolean encontrado = false;
 
         for (QueryDocumentSnapshot document : task.getResult()) {
-            if(Objects.equals(document.get("Nickname"), tv.getText().toString())){
+            if(Objects.equals(document.get("Username"), tv.getText().toString())){
                 encontrado = true;
                 break;
             }

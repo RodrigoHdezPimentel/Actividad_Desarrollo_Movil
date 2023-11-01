@@ -2,39 +2,117 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu"
     android:background="@color/background_green"
-    >
+    android:padding="10dp"
+    tools:context=".menu">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline20"
+        android:id="@+id/LimitImgProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.81" />
+
+    <ImageView
+        android:id="@+id/ImgFondo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/topomadriguera" />
+
+    <ImageView
+        android:id="@+id/ProfileImg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/LimitImgProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/imagen1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <TextView
+        android:id="@+id/startbutton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="60dp"
+        android:text="PRESS TO START"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+    <Button
+        android:id="@+id/AcountBut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cuenta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
+        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
+        app:layout_constraintTop_toTopOf="@+id/LimitButT" />
+
+    <Button
+        android:id="@+id/SettingsBut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ajustes"
+        app:layout_constraintBottom_toTopOf="@+id/LimitButB"
+        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
+        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/LimitButT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/LimitButB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75786597" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/LimitButLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/LimitButR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/topomadriguera" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/borde_redondo"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
