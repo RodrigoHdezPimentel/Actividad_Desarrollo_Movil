@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
         TextView error = findViewById(R.id.error);
         EditText nameText = findViewById(R.id.nameText);
         Button Login = findViewById(R.id.Login);
+
         Button register = findViewById(R.id.Register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent nuevoIntent = new Intent(MainActivity.this, Insertar.class);
-                startActivity(nuevoIntent);
+                Intent newIntent = new Intent(MainActivity.this, Insertar.class);
+                startActivity(newIntent);
             }
         });
 
@@ -89,9 +89,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intentToMenu = new Intent(MainActivity.this, menu.class);
         startActivity(intentToMenu);
     }
-    
-    public void toPrueba(){
-        Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
-        startActivity(FBIntent);
-    }
+
 }
