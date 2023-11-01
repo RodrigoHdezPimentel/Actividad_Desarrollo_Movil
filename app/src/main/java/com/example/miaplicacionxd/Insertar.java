@@ -27,6 +27,7 @@ import java.util.Objects;
 public class Insertar extends AppCompatActivity {
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     TextView error;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,13 @@ public class Insertar extends AppCompatActivity {
                 InsertValues();
             }
         });
+        Button backBut = findViewById(R.id.backBut);
+        backBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeToMain();
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -50,59 +58,16 @@ public class Insertar extends AppCompatActivity {
         TextView UsernameTextView = findViewById(R.id.DB_UserName);
         TextView EmailTextView = findViewById(R.id.DB_Email);
 
-        if (registroEncontrado(UsernameTextView)) {
-            if (EmailTextView.getText().toString().equals("")
-                    || UsernameTextView.getText().toString().equals("")) {
-                error.setVisibility(View.VISIBLE);
-                error.setText("RELLENE TODOS LOS CAMPOS");
-            } else {
-                Map<String, String> user = new HashMap<>();
-                user.put("Username", UsernameTextView.getText().toString());
-                user.put("Email", EmailTextView.getText().toString());
-
-                firestoreDB.collection("Usuarios")
-                        .document(UsernameTextView.getText().toString())
-                        .set(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                //error.setVisibility(View.INVISIBLE);
-                                Toast.makeText(Insertar.this, "Insertado correctamente", Toast.LENGTH_SHORT).show();
-                                Log.d("_Debug", "TODO ON");
-                                UsernameTextView.setText("");
-                                EmailTextView.setText("");
-                                changeToMain();              //despues de ingresar los datos, lo envió al main
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //error.setVisibility(View.VISIBLE);
-                                //error.setText("ERROR EN LA CONEXION A LA BASE DE DATOS");
-                                Toast.makeText(Insertar.this, "Error", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        }else{
-                error.setVisibility(View.VISIBLE);
-                error.setText("NOMBRE DE USUARIO YA EXISTENTE");
-        }
-
-    }
-    public boolean registroEncontrado(TextView tv) {
-        final boolean[] encontrado = {false};
-
         firestoreDB.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (Objects.equals(document.get("Username"), tv.getText().toString())) {
-                                    encontrado[0] = true;
-                                    break;
-                                }
-
+                            if (!registroEncontrado(task, UsernameTextView)) {
+                                insertarNewuser(UsernameTextView, EmailTextView);
+                            } else {
+                                error.setVisibility(View.VISIBLE);
+                                error.setText("NOMBRE DE USUARIO YA EXISTENTE");
                             }
                         }
                     }
@@ -110,11 +75,57 @@ public class Insertar extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        error.setVisibility(View.VISIBLE);
+                        error.setText("ERROR EN LA CONEXION A LA BASE DE DATOS");
                         Toast.makeText(Insertar.this, "ERROR EN LA CONEXION", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    public boolean registroEncontrado(Task<QuerySnapshot> task, TextView tv) {
+        final boolean[] encontrado = {false};
+        Toast.makeText(this, "Entrado", Toast.LENGTH_SHORT).show();
 
+        for (QueryDocumentSnapshot document : task.getResult()) {
+            if (Objects.equals(document.get("Username"), tv.getText().toString())) {
+                encontrado[0] = true;
+                break;
+            }
+
+        }
         return encontrado[0];
+    }
+    @SuppressLint("SetTextI18n")
+    public void insertarNewuser(TextView UsernameTextView, TextView EmailTextView) {
+        if (EmailTextView.getText().toString().equals("")
+                || UsernameTextView.getText().toString().equals("")) {
+            error.setVisibility(View.VISIBLE);
+            error.setText("RELLENE TODOS LOS CAMPOS");
+        } else {
+            Map<String, String> user = new HashMap<>();
+            user.put("Username", UsernameTextView.getText().toString());
+            user.put("Email", EmailTextView.getText().toString());
+
+            firestoreDB.collection("Usuarios")
+                    .document(UsernameTextView.getText().toString())
+                    .set(user)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            error.setVisibility(View.INVISIBLE);
+                            Log.d("_Debug", "TODO ON");
+                            UsernameTextView.setText("");
+                            EmailTextView.setText("");
+                            changeToMain();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            error.setVisibility(View.VISIBLE);
+                            error.setText("ERROR EN LA CONEXION A LA BASE DE DATOS");
+                            Toast.makeText(Insertar.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
     public void changeToMain() {
         Intent nuevoIntent = new Intent(Insertar.this, MainActivity.class);
