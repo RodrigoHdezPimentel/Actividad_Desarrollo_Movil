@@ -83,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentToMenu);
     }
 
-    public void changeToInsert(){
-        Intent nuevoIntent = new Intent(MainActivity.this, Insertar.class);
-        startActivity(nuevoIntent);
-    }
     public void toPrueba(){
         Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
         startActivity(FBIntent);
