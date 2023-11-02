@@ -1,4 +1,4 @@
-package com.example.miaplicacionxd;
+package com.example.Wacamole;
 
 import android.content.Context;
 

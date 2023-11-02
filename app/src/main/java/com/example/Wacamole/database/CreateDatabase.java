@@ -1,4 +1,4 @@
-package com.example.miaplicacionxd.database;
+package com.example.Wacamole.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

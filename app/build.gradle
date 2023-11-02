@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.miaplicacionxd'
+    namespace 'com.example.Wacamole'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.miaplicacionxd"
+        applicationId "com.example.Wacamole"
         minSdk 24
         targetSdk 33
         versionCode 1

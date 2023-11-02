@@ -1,4 +1,4 @@
-package com.example.miaplicacionxd;
+package com.example.Wacamole;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
