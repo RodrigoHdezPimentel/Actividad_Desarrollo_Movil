@@ -30,18 +30,18 @@
         app:layout_constraintGuide_begin="124dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+        android:id="@+id/margen_der"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.77858883" />
+        app:layout_constraintGuide_percent="0.82" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/margen_izq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_percent="0.18" />
 
     <TextView
 
@@ -53,19 +53,19 @@
         android:textColor="#000000"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
         app:layout_constraintHorizontal_bias="0.449"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
         app:layout_constraintTop_toTopOf="@+id/guideline7"
         app:layout_constraintVertical_bias="0.6" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
         app:layout_constraintTop_toBottomOf="@+id/efecto_sonido"
         app:srcCompat="@drawable/barra_ajustes" />
 
@@ -74,14 +74,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="216dp" />
+        app:layout_constraintGuide_percent="0.29548565" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="318dp" />
+        app:layout_constraintGuide_percent="0.4350205" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -99,8 +99,8 @@
         android:textColor="#000000"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -108,22 +108,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="354dp" />
+        app:layout_constraintGuide_percent="0.48426813" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="444dp" />
+        app:layout_constraintGuide_percent="0.6073871" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
         app:layout_constraintTop_toBottomOf="@+id/Musica"
         app:layout_constraintVertical_bias="0.563"
         app:srcCompat="@drawable/barra_ajustes" />
@@ -136,8 +136,8 @@
         android:textColor="#000000"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline21"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
         app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -145,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="519dp" />
+        app:layout_constraintGuide_percent="0.7099863" />
 
     <Button
         android:id="@+id/ingles"
@@ -155,7 +155,8 @@
         android:text="Ingles"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/CentroVertical"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
         app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
     <Button
@@ -166,8 +167,8 @@
         android:text="Español"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toEndOf="@+id/ingles"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
+        app:layout_constraintStart_toStartOf="@+id/CentroVertical"
         app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
     <Button
@@ -175,7 +176,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="toMain"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="612dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/margen_der"
+        app:layout_constraintStart_toStartOf="@+id/margen_izq"
+        app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/CentroVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

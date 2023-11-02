@@ -75,20 +75,6 @@ android:background="@color/background_ligth_green"
         app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/Boton_Vert_D"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/Boton_Vert_I"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.33" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Text_Vert_I"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,8 +89,8 @@ android:background="@color/background_ligth_green"
         android:backgroundTint="@color/button_green"
         android:text="Confirmar"
         app:layout_constraintBottom_toTopOf="@+id/Boton_Hori_In"
-        app:layout_constraintEnd_toStartOf="@+id/Boton_Vert_D"
-        app:layout_constraintStart_toStartOf="@+id/Boton_Vert_I"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Text_Hori_In" />
 
     <TextView
