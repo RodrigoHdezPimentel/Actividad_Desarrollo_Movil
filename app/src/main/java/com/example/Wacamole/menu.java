@@ -3,7 +3,6 @@ package com.example.Wacamole;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +18,6 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Button Ajustes = findViewById(R.id.SettingsBut);
-        Ajustes.setVisibility(View.INVISIBLE);
         Ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,6 +25,7 @@ public class menu extends AppCompatActivity {
                 startActivity(intentToGame);
             }
         });
+        Ajustes.setVisibility(View.INVISIBLE);
         Button Cuenta = findViewById(R.id.AcountBut);
         Cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,36 +44,26 @@ public class menu extends AppCompatActivity {
                 startActivity(intentToGame);
             }
         });
-        Button logOut = findViewById(R.id.logOut);
-        logOut.setVisibility(View.INVISIBLE);
-        ImageView flecha = findViewById(R.id.closePopup);
+
         ConstraintLayout Fondo = findViewById(R.id.Fondo);
         ImageView ImgFondo = findViewById(R.id.ImgFondo);
         ImageView profileimg = findViewById(R.id.ProfileImg);
         profileimg.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View v) {
-                logOut.setVisibility(View.VISIBLE);
-                flecha.setVisibility(View.VISIBLE);
                 Fondo.setBackground(getDrawable(R.color.background_ligth_green));
                 Ajustes.setVisibility(View.VISIBLE);
                 Cuenta.setVisibility(View.VISIBLE);
                 ClickToStart.setEnabled(false);
                 profileimg.setAlpha(0.3f);
                 ImgFondo.setAlpha(0.3f);
-                ClickToStart.setAlpha(0.1f);
+                ClickToStart.setAlpha(0.3f);
                 profileimg.setEnabled(false);
             }
         });
-
-        flecha.setVisibility(View.INVISIBLE);
-        flecha.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
+        Fondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logOut.setVisibility(View.INVISIBLE);
-                flecha.setVisibility(View.INVISIBLE);
                 Fondo.setBackground(getDrawable(R.color.background_green));
                 Ajustes.setVisibility(View.INVISIBLE);
                 Cuenta.setVisibility(View.INVISIBLE);
@@ -83,15 +72,6 @@ public class menu extends AppCompatActivity {
                 ImgFondo.setAlpha(1f);
                 ClickToStart.setAlpha(1f);
                 profileimg.setEnabled(true);
-            }
-        });
-
-
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toMain = new Intent(menu.this, MainActivity.class);
-                startActivity(toMain);
             }
         });
     }

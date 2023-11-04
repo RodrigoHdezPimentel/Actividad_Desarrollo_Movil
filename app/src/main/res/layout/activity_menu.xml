@@ -43,12 +43,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.66" />
+        app:layout_constraintGuide_percent="0.65" />
 
     <TextView
         android:id="@+id/startbutton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:paddingTop="60dp"
         android:text="PRESS TO START"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -59,40 +60,38 @@
         app:layout_constraintTop_toTopOf="@+id/guideline22" />
 
     <Button
-        android:id="@+id/logOut"
+        android:id="@+id/AcountBut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/button_green"
-        android:text="Cerrar Sesion"
-        app:layout_constraintBottom_toTopOf="@+id/guideline22"
+        android:text="Cuenta"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/LimitButR"
         app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
         app:layout_constraintTop_toTopOf="@+id/LimitButT" />
 
     <Button
-        android:id="@+id/AcountBut"
+        android:id="@+id/SettingsBut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/button_green"
-        android:text="Cuenta"
-        app:layout_constraintBottom_toTopOf="@+id/LimitButT"
+        android:text="Ajustes"
+        app:layout_constraintBottom_toTopOf="@+id/LimitButB"
         app:layout_constraintEnd_toStartOf="@+id/LimitButR"
         app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
-        app:layout_constraintTop_toTopOf="@+id/ImgFondo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/LimitButT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/LimitButB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.75786597" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/LimitButLeft"
@@ -114,27 +113,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.12" />
-
-    <ImageView
-        android:id="@+id/closePopup"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/LimitButB"
-        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
-        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
-        app:layout_constraintTop_toTopOf="@+id/guideline22"
-        app:srcCompat="@drawable/backarrow" />
-
-    <Button
-        android:id="@+id/SettingsBut"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/button_green"
-        android:text="Ajustes"
-        app:layout_constraintBottom_toTopOf="@+id/logOut"
-        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
-        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
-        app:layout_constraintTop_toBottomOf="@+id/AcountBut" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

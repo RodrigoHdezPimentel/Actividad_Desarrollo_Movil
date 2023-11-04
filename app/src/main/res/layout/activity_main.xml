@@ -50,6 +50,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
+    <Button
+        android:id="@+id/ToPrueba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pruebas"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/margen_right"
+        app:layout_constraintStart_toStartOf="@+id/margen_left"
+        app:layout_constraintTop_toTopOf="@+id/Portada" />
+
     <EditText
         android:id="@+id/nameText"
         android:layout_width="0dp"
