@@ -1,7 +1,9 @@
 package com.example.miaplicacionxd;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -11,15 +13,28 @@ import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class showCuenta extends AppCompatActivity {
-
+    String username;
+    FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_cuenta);
+        Intent usernamerecibido = getIntent();
+        username = usernamerecibido.getStringExtra("Nombre");
+        TextView userTextname = findViewById(R.id.Username_Text);
+        userTextname.setText(username);
         //Para cuando le den click la flecha, te manda a la clase Cuenta.java
         ImageView ImgFlecha = findViewById(R.id.Flecha);
     ImgFlecha.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +48,25 @@ public class showCuenta extends AppCompatActivity {
 
         //SOLO FALTARIA REALIZAR EL LLAMADO DE LAS CUENTAS EN LA FIREBASE PARA EL SCROLL
         //Y EN DONDE DICE Pepito ahí se colocaria el Username DE LA PERSONA QUE INICIO SESION
+        LinearLayout LLCuentas = findViewById(R.id.LLCuentas);
+        LLCuentas.removeAllViews();
+        TextView NombreCuenta = new TextView(this);
+        firestoreDB.collection("Cuentas")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            NombreCuenta .setText("");
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
 //Solamente sirve para poner un puto borde al texview que dice "Cuentas" xD
@@ -42,7 +76,7 @@ public void colorBorde(){
     TextView textView = findViewById(R.id.String_cuenta);
 
     ShapeDrawable backgroundDrawable = new ShapeDrawable(new RectShape());
-    backgroundDrawable.getPaint().setColor(getResources().getColor(R.color.background_light_green));
+    backgroundDrawable.getPaint().setColor(getColor(R.color.background_light_green));
 
     ShapeDrawable borderDrawable = new ShapeDrawable(new RectShape());
     borderDrawable.getPaint().setStrokeWidth(6f);
