@@ -22,7 +22,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 public class showCuenta extends AppCompatActivity {
     String username;
@@ -37,27 +40,36 @@ public class showCuenta extends AppCompatActivity {
         userTextname.setText(username);
         //Para cuando le den click la flecha, te manda a la clase Cuenta.java
         ImageView ImgFlecha = findViewById(R.id.Flecha);
-    ImgFlecha.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intentToMenu = new Intent(showCuenta.this,Cuenta.class);
-        startActivity(intentToMenu);
-                }
-            });
+        ImgFlecha.setOnClickListener(new View.OnClickListener() {
+        @Override
+            public void onClick(View view) {
+                Intent intentToMenu = new Intent(showCuenta.this,Cuenta.class);
+                intentToMenu.putExtra("Nombre", username);
+                startActivity(intentToMenu);
+            }
+        });
         colorBorde();
 
         //SOLO FALTARIA REALIZAR EL LLAMADO DE LAS CUENTAS EN LA FIREBASE PARA EL SCROLL
         //Y EN DONDE DICE Pepito ahí se colocaria el Username DE LA PERSONA QUE INICIO SESION
         LinearLayout LLCuentas = findViewById(R.id.LLCuentas);
         LLCuentas.removeAllViews();
-        TextView NombreCuenta = new TextView(this);
         firestoreDB.collection("Cuentas")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                TextView NombreCuenta = new TextView(showCuenta.this);
+                                NombreCuenta.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                NombreCuenta.setTextSize(25);
+                                NombreCuenta.setPadding(0, 10,0,10);
 
-                            NombreCuenta .setText("");
+                                if(document.get("UserName").equals(username)){
+                                    NombreCuenta.setText(document.get("AccountName").toString());
+                                    LLCuentas.addView(NombreCuenta);
+                                }
+                            }
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
