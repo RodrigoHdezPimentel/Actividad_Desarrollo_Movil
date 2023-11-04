@@ -19,8 +19,8 @@ public class Ajustes extends AppCompatActivity {
             @Override
             //DESPUES DE DARLE CLICK A LA FLECHA LO MANDARIA A LA CLASE CUENTA
             public void onClick(View view) {
-                //Intent nuevoIntent = new Intent(Ajustes.this, Cuenta.class);
-                //startActivity(nuevoIntent);
+                Intent nuevoIntent = new Intent(Ajustes.this, Cuenta.class);
+                startActivity(nuevoIntent);
             }
         });
 
