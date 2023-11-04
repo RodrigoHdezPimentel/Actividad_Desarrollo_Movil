@@ -9,13 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class menu extends AppCompatActivity {
-
+String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        Intent usernamerebido = getIntent();
+        username = usernamerebido.getStringExtra("Nombre");
+        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
 
         Button Ajustes = findViewById(R.id.SettingsBut);
         Ajustes.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +35,7 @@ public class menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentToGame = new Intent(menu.this, Cuenta.class);
+                intentToGame.putExtra("Nombre", username);
                 startActivity(intentToGame);
             }
         });
@@ -51,7 +56,7 @@ public class menu extends AppCompatActivity {
         profileimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fondo.setBackground(getDrawable(R.color.background_light_green));
+                Fondo.setBackground(getDrawable(R.color.background_ligth_green));
                 Ajustes.setVisibility(View.VISIBLE);
                 Cuenta.setVisibility(View.VISIBLE);
                 ClickToStart.setEnabled(false);
