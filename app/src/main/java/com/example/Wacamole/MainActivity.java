@@ -22,14 +22,14 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-    EditText nameText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         TextView error = findViewById(R.id.error);
-        nameText = findViewById(R.id.nameText);
+        EditText nameText = findViewById(R.id.nameText);
         Button Login = findViewById(R.id.Login);
 
         Button register = findViewById(R.id.Register);
@@ -85,18 +85,8 @@ public class MainActivity extends AppCompatActivity {
         return encontrado;
     }
     public void goToMenu(){
-        String username = nameText.getText().toString();
         Intent intentToMenu = new Intent(MainActivity.this, menu.class);
-        intentToMenu.putExtra("Nombre", username);
         startActivity(intentToMenu);
     }
 
-    //public void goToShowCuenta(View view){
-       // Intent intentToMenu = new Intent(MainActivity.this,showCuenta.class);
-        //startActivity(intentToMenu);
-   // }
-    public void toPrueba(){
-        Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
-        startActivity(FBIntent);
-    }
 }

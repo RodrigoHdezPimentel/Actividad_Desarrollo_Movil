@@ -9,17 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class menu extends AppCompatActivity {
-String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        Intent usernamerebido = getIntent();
-        username = usernamerebido.getStringExtra("Nombre");
-        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
 
         Button Ajustes = findViewById(R.id.SettingsBut);
         Ajustes.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +31,6 @@ String username;
             @Override
             public void onClick(View v) {
                 Intent intentToGame = new Intent(menu.this, Cuenta.class);
-                intentToGame.putExtra("Nombre", username);
                 startActivity(intentToGame);
             }
         });

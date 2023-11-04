@@ -7,6 +7,7 @@
     android:background="@color/background_green"
     tools:context=".Cuenta">
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/goto_show_Cuentas"
         android:layout_width="wrap_content"
@@ -210,4 +211,6 @@
         app:srcCompat="@drawable/imagen3" />
 
 
+=======
+>>>>>>> parent of 7457efc (Merge branch 'ADM-Crear-ShowCuentas')
 </androidx.constraintlayout.widget.ConstraintLayout>
