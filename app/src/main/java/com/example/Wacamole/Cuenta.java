@@ -27,13 +27,6 @@ String username;
                 startActivity(goShow);
             }
         });
-        ImageView Flecha = findViewById(R.id.Flecha);
-        Flecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goMenu = new Intent(Cuenta.this, menu.class);
-                startActivity(goMenu);
-            }
-        });
+
     }
 }
