@@ -17,9 +17,9 @@ public class Ajustes extends AppCompatActivity {
         ImageView ImgFlecha = findViewById(R.id.Flecha);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
             @Override
-            //DESPUES DE DARLE CLICK A LA FLECHA LO MANDARIA A LA CLASE CUENTA
+            //DESPUES DE DARLE CLICK A LA FLECHA LO MANDARIA A LA CLASE MENU
             public void onClick(View view) {
-                Intent nuevoIntent = new Intent(Ajustes.this, Cuenta.class);
+                Intent nuevoIntent = new Intent(Ajustes.this, menu.class);
                 startActivity(nuevoIntent);
             }
         });

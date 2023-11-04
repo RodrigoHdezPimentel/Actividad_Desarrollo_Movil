@@ -39,7 +39,18 @@ String username;
                 startActivity(intentToGame);
             }
         });
+        Button CerrarSesion = findViewById(R.id.cerrarSesion);
+        CerrarSesion.setVisibility(View.INVISIBLE);
+        CerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentToGame = new Intent(menu.this, MainActivity.class);
+                startActivity(intentToGame);
+            }
+        });
         Cuenta.setVisibility(View.INVISIBLE);
+        ImageView Flecha = findViewById(R.id.Flecha);
+        Flecha.setVisibility(View.INVISIBLE);
 
         TextView ClickToStart = findViewById(R.id.startbutton);
         ClickToStart.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +70,8 @@ String username;
                 Fondo.setBackground(getDrawable(R.color.background_light_green));
                 Ajustes.setVisibility(View.VISIBLE);
                 Cuenta.setVisibility(View.VISIBLE);
+                CerrarSesion.setVisibility(View.VISIBLE);
+                Flecha.setVisibility(View.VISIBLE);
                 ClickToStart.setEnabled(false);
                 profileimg.setAlpha(0.3f);
                 ImgFondo.setAlpha(0.3f);
@@ -66,12 +79,15 @@ String username;
                 profileimg.setEnabled(false);
             }
         });
-        Fondo.setOnClickListener(new View.OnClickListener() {
+
+        Flecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fondo.setBackground(getDrawable(R.color.background_green));
                 Ajustes.setVisibility(View.INVISIBLE);
                 Cuenta.setVisibility(View.INVISIBLE);
+                CerrarSesion.setVisibility(View.INVISIBLE);
+                Flecha.setVisibility(View.INVISIBLE);
                 ClickToStart.setEnabled(true);
                 profileimg.setAlpha(1f);
                 ImgFondo.setAlpha(1f);
