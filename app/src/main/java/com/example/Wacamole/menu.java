@@ -56,7 +56,7 @@ String username;
         profileimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fondo.setBackground(getDrawable(R.color.background_light_green));
+                Fondo.setBackground(getDrawable(R.color.background_ligth_green));
                 Ajustes.setVisibility(View.VISIBLE);
                 Cuenta.setVisibility(View.VISIBLE);
                 ClickToStart.setEnabled(false);

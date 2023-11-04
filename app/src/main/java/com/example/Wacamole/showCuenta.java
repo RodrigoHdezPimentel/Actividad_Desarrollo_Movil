@@ -1,4 +1,4 @@
-package com.example.Wacamole;
+package com.example.miaplicacionxd;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +18,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.Wacamole.Cuenta;
-import com.example.Wacamole.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +43,7 @@ public class showCuenta extends AppCompatActivity {
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {
-                Intent intentToMenu = new Intent(showCuenta.this, Cuenta.class);
+                Intent intentToMenu = new Intent(showCuenta.this,Cuenta.class);
                 intentToMenu.putExtra("Nombre", username);
                 startActivity(intentToMenu);
             }
