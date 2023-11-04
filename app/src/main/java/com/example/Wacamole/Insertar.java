@@ -65,6 +65,7 @@ public class Insertar extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             if (!registroEncontrado(task, UsernameTextView)) {
                                 insertarNewuser(UsernameTextView, EmailTextView);
+                                CrearNewAcount(UsernameTextView);
                             } else {
                                 error.setVisibility(View.VISIBLE);
                                 error.setText("NOMBRE DE USUARIO YA EXISTENTE");
@@ -126,6 +127,29 @@ public class Insertar extends AppCompatActivity {
                         }
                     });
         }
+    }
+    public void CrearNewAcount(TextView name){
+        Map<String, String> cuenta = new HashMap<>();
+        cuenta.put("AccountName", name.getText().toString());
+        cuenta.put("CuentaPrincipal", "true");
+        cuenta.put("FotoPerfil", "0");
+        cuenta.put("Highest Score", "0");
+        cuenta.put("UserName", name.getText().toString());
+
+        firestoreDB.collection("Cuentas")
+                .document()
+                .set(cuenta)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(Insertar.this, "Exito al crear cuenta", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Insertar.this, "Error al crear cunta", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
     public void changeToMain() {
         Intent nuevoIntent = new Intent(Insertar.this, MainActivity.class);
