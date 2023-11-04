@@ -14,20 +14,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.Wacamole.Cuenta;
-import com.example.Wacamole.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.Objects;
 
 public class showCuenta extends AppCompatActivity {
     String username;
@@ -45,7 +39,7 @@ public class showCuenta extends AppCompatActivity {
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {
-                Intent intentToCuenta = new Intent(showCuenta.this, Cuenta.class);
+                Intent intentToCuenta = new Intent(showCuenta.this, User.class);
                 intentToCuenta.putExtra("Nombre", username);
                 startActivity(intentToCuenta);
             }

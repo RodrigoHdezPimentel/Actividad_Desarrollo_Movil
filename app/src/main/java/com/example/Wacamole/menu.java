@@ -35,7 +35,7 @@ String username;
         Cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToCuenta = new Intent(menu.this, Cuenta.class);
+                Intent intentToCuenta = new Intent(menu.this, User.class);
                 intentToCuenta.putExtra("Nombre", username);
                 startActivity(intentToCuenta);
             }
