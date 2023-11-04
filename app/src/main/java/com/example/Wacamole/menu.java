@@ -75,7 +75,7 @@ String username;
                 ClickToStart.setEnabled(false);
                 profileimg.setAlpha(0.3f);
                 ImgFondo.setAlpha(0.3f);
-                ClickToStart.setAlpha(0.3f);
+                ClickToStart.setAlpha(0.15f);
                 profileimg.setEnabled(false);
             }
         });
