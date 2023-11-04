@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Insertar"
-android:background="@color/background_ligth_green"
-    >
+    android:background="@color/background_light_green"
+    tools:context=".Insertar">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Text_Hori_In"
