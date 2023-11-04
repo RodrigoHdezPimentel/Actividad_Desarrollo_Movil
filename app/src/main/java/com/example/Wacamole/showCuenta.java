@@ -45,9 +45,9 @@ public class showCuenta extends AppCompatActivity {
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {
-                Intent intentToMenu = new Intent(showCuenta.this, Cuenta.class);
-                intentToMenu.putExtra("Nombre", username);
-                startActivity(intentToMenu);
+                Intent intentToCuenta = new Intent(showCuenta.this, Cuenta.class);
+                intentToCuenta.putExtra("Nombre", username);
+                startActivity(intentToCuenta);
             }
         });
         colorBorde();

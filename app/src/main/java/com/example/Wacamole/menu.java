@@ -25,8 +25,8 @@ String username;
         Ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToGame = new Intent(menu.this, Ajustes.class);
-                startActivity(intentToGame);
+                Intent intentToSetting = new Intent(menu.this, Ajustes.class);
+                startActivity(intentToSetting);
             }
         });
         Ajustes.setVisibility(View.INVISIBLE);
@@ -34,9 +34,9 @@ String username;
         Cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToGame = new Intent(menu.this, Cuenta.class);
-                intentToGame.putExtra("Nombre", username);
-                startActivity(intentToGame);
+                Intent intentToCuenta = new Intent(menu.this, Cuenta.class);
+                intentToCuenta.putExtra("Nombre", username);
+                startActivity(intentToCuenta);
             }
         });
         Button CerrarSesion = findViewById(R.id.cerrarSesion);
@@ -44,8 +44,8 @@ String username;
         CerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentToGame = new Intent(menu.this, MainActivity.class);
-                startActivity(intentToGame);
+                Intent intentToMain = new Intent(menu.this, MainActivity.class);
+                startActivity(intentToMain);
             }
         });
         Cuenta.setVisibility(View.INVISIBLE);

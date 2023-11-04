@@ -65,7 +65,7 @@
         app:srcCompat="@drawable/imagen1" />
 
     <Button
-        android:id="@+id/confirm_button"
+        android:id="@+id/Flecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button_green"
@@ -208,6 +208,16 @@
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toTopOf="@+id/guideline34"
         app:srcCompat="@drawable/imagen3" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline26"
+        app:layout_constraintTop_toTopOf="@+id/guideline30"
+        app:srcCompat="@drawable/flecharetroceso" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class Cuenta extends AppCompatActivity {
 String username;
@@ -24,6 +25,14 @@ String username;
                 Intent goShow = new Intent(Cuenta.this, showCuenta.class);
                 goShow.putExtra("Nombre", username);
                 startActivity(goShow);
+            }
+        });
+        ImageView Flecha = findViewById(R.id.Flecha);
+        Flecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goMenu = new Intent(Cuenta.this, menu.class);
+                startActivity(goMenu);
             }
         });
     }
