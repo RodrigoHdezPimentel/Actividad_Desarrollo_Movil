@@ -26,6 +26,7 @@ String username;
             @Override
             public void onClick(View v) {
                 Intent intentToSetting = new Intent(menu.this, Ajustes.class);
+                intentToSetting.putExtra("Nombre", username);
                 startActivity(intentToSetting);
             }
         });
