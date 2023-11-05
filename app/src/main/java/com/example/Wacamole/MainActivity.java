@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                         if (registroEncontrado(task, nameText)) {
-                                            //buscarCuentaPrincipal(nameText);                                            error.setVisibility(View.INVISIBLE);
+                                            error.setVisibility(View.INVISIBLE);
                                             goToMenu(nameText);
                                         } else {
                                             error.setVisibility(View.VISIBLE);
@@ -85,37 +85,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return encontrado;
     }
-    String username;
+
     public void goToMenu(EditText tv){
         Intent intentToMenu = new Intent(MainActivity.this, menu.class);
-        intentToMenu.putExtra("Nombre", username);
+        intentToMenu.putExtra("Nombre", tv.getText().toString());
         startActivity(intentToMenu);
-    }
-    public void buscarCuentaPrincipal(EditText tv){
-
-        firestoreDB.collection("Cuentas")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            //Comprobar cual es la cuenta principal
-                            Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-    }
-
-    //public void goToShowCuenta(View view){
-       // Intent intentToMenu = new Intent(MainActivity.this,showCuenta.class);
-        //startActivity(intentToMenu);
-   // }
-    public void toPrueba(){
-        Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
-        startActivity(FBIntent);
     }
 }

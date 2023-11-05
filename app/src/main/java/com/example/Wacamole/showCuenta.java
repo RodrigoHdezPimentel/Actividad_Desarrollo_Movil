@@ -44,7 +44,7 @@ public class showCuenta extends AppCompatActivity {
         // NOS TOCARA MANDARLO A CREARSE UN ACCOUNT NAME POR OBLIGACION XD
 
         //Para cuando le den click la flecha, te manda a la clase Cuenta.java
-        ImageView ImgFlecha = findViewById(R.id.confirmar);
+        ImageView ImgFlecha = findViewById(R.id.quitarButMenu);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {

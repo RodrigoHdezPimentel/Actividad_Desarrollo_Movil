@@ -16,7 +16,7 @@ public class Ajustes extends AppCompatActivity {
         setContentView(R.layout.activity_ajustes);
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
-        ImageView ImgFlecha = findViewById(R.id.confirmar);
+        ImageView ImgFlecha = findViewById(R.id.quitarButMenu);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
             @Override
             //DESPUES DE DARLE CLICK A LA FLECHA LO MANDARIA A LA CLASE MENU

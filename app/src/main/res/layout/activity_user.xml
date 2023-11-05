@@ -23,10 +23,11 @@
     <Button
         android:id="@+id/SelectCuenta"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/button_green"
-        android:text="Buttonz"
-        android:textSize="12sp"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/button_green"
+        android:text="Cambiar de Cuenta"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline38"
         app:layout_constraintEnd_toStartOf="@+id/guideline43"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="@+id/guideline30" />
@@ -39,6 +40,7 @@
         android:inputType="text"
         android:text="@string/username"
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
     <EditText
@@ -50,6 +52,7 @@
         android:text="@string/email"
         app:layout_constraintBottom_toTopOf="@+id/guideline30"
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DB_UserName" />
 
     <ImageView
@@ -64,12 +67,13 @@
         app:srcCompat="@drawable/imagen1" />
 
     <Button
-        android:id="@+id/confirmar"
+        android:id="@+id/quitarButMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button_green"
         android:text="Confirmar"
         android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline38"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline30" />
@@ -77,10 +81,11 @@
     <Button
         android:id="@+id/newAccountBut"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:backgroundTint="@color/button_green"
         android:text="Añadir cuenta"
         android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline38"
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
         app:layout_constraintStart_toStartOf="@+id/guideline42"
         app:layout_constraintTop_toTopOf="@+id/guideline30" />
@@ -185,6 +190,7 @@
         android:id="@+id/ModAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_green"
         android:text="Mod"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline34"
@@ -205,6 +211,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_green"
+        android:text="del"
+        app:layout_constraintBottom_toTopOf="@+id/guideline34"
+        app:layout_constraintEnd_toStartOf="@+id/perfil_cuenta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

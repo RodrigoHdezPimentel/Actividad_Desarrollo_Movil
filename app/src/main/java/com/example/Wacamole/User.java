@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -34,7 +35,9 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         EditText textEmial = findViewById(R.id.DB_Email);
         Button goCuenta = findViewById(R.id.newAccountBut);
         Button mod = findViewById(R.id.ModAccount);
-        Button counts = findViewById(R.id.SelectCuenta);
+        Button countselect = findViewById(R.id.SelectCuenta);
+        Button confirmUpdate = findViewById(R.id.quitarButMenu);
+        Button delete = findViewById(R.id.delete);
 
         //ACÁ SOLO FALTA HACER EL UPDATE AL USUARIO.
         //CAMBIOS MIOS (diego)--------------- ACÄ LO QUE HAGO ES PARA COLOCAR EL EMAIL EN EDIT TEXT
@@ -61,9 +64,41 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
             }
         });
+        TextView nameAccount = findViewById(R.id.AccountName);
+        nameAccount.setText(username);
 
+        //Boton eliminar
+        delete.setVisibility(View.INVISIBLE);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteUser();
+            }
+        });
+
+        //Boton de confirmar update
+        confirmUpdate.setVisibility(View.INVISIBLE);
+        confirmUpdate.setEnabled(false);
+        confirmUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textUsername.setEnabled(false);
+                textEmial.setEnabled(false);
+                countselect.setVisibility(View.VISIBLE);
+                countselect.setEnabled(true);
+                goCuenta.setVisibility(View.VISIBLE);
+                goCuenta.setEnabled(true);
+                confirmUpdate.setVisibility(View.INVISIBLE);
+                confirmUpdate.setEnabled(false);
+                delete.setVisibility(View.INVISIBLE);
+                mod.setVisibility(View.VISIBLE);
+                mod.setEnabled(true);
+                delete.setEnabled(false);
+                delete.setVisibility(View.INVISIBLE);
+                updateUser();
+            }
+        });
         //BOTON DE IR A LA CLASE CUENTA CUANDO LE DAN CLICK AÑADIR CUENTA
-        goCuenta.setVisibility(View.INVISIBLE);
         goCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,22 +107,33 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 startActivity(goCuenta);
             }
         });
+        //Ir a tus cuentas
+        countselect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goShow = new Intent(User.this, showCuenta.class);
+                goShow.putExtra("Nombre", username);
+                startActivity(goShow);
+            }
+        });
         //Boton para modificar
         mod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 textUsername.setEnabled(true);
                 textEmial.setEnabled(true);
+                countselect.setVisibility(View.INVISIBLE);
+                countselect.setEnabled(false);
+                goCuenta.setVisibility(View.INVISIBLE);
+                goCuenta.setEnabled(false);
+                confirmUpdate.setVisibility(View.VISIBLE);
+                confirmUpdate.setEnabled(true);
+                delete.setVisibility(View.VISIBLE);
+                mod.setVisibility(View.INVISIBLE);
+                mod.setEnabled(false);
+                delete.setEnabled(true);
 
-            }
-        });
-        //Ir a tus cuentas
-        counts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goShow = new Intent(User.this, showCuenta.class);
-                goShow.putExtra("Nombre", username);
-                startActivity(goShow);
+
             }
         });
 
@@ -136,6 +182,40 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                     }
                 });
         //-----------------------------------------------------------------
+    }
+    public void updateUser(){
+        firestoreDB.collection("Usuarios")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()                                 ) {
+
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(User.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    public void deleteUser() {
+        firestoreDB.collection("Usuarios").document(username)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Intent toMain = new Intent(User.this, MainActivity.class);
+                        startActivity(toMain);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(User.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 
