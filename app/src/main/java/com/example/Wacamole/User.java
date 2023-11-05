@@ -44,6 +44,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
             if(document.get("Username").equals(username)){
              EditText textEmial = findViewById(R.id.DB_Email);
             textEmial.setText(document.get("Email").toString());
+            //ACÁ LE COLOCO EL USERNAME EN EL EDITTEXT
             EditText textUsername= findViewById(R.id.DB_UserName);
             textUsername.setText(username);
 
@@ -58,7 +59,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
             }
         });
-            //BOTON DE IR A LA CLASE CUENTA
+            //BOTON DE IR A LA CLASE CUENTA CUANDO LE DAN CLICK AÑADIR CUENTA
             Button goCuenta = findViewById(R.id.newAccountBut);
             goCuenta.setOnClickListener(new View.OnClickListener() {
                 @Override
