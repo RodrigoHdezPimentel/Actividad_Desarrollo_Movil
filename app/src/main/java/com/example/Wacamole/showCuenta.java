@@ -44,7 +44,7 @@ public class showCuenta extends AppCompatActivity {
         // NOS TOCARA MANDARLO A CREARSE UN ACCOUNT NAME POR OBLIGACION XD
 
         //Para cuando le den click la flecha, te manda a la clase Cuenta.java
-        ImageView ImgFlecha = findViewById(R.id.Flecha);
+        ImageView ImgFlecha = findViewById(R.id.confirmar);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {
@@ -64,7 +64,7 @@ public class showCuenta extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 TextView NombreCuenta = new TextView(showCuenta.this);
-                               NombreCuenta.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                NombreCuenta.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                                 NombreCuenta.setTextSize(25);
                                 NombreCuenta.setPadding(0, 10,0,10);
 

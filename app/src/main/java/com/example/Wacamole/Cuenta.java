@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,15 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
 
+        ImageView flecha = findViewById(R.id.flecha);
+        flecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toUser = new Intent(Cuenta.this, User.class);
+                toUser.putExtra("Nombre", username);
+                startActivity(toUser);
+            }
+        });
         EditText accountName = findViewById(R.id.AccountName);
 
         Button confirmar = findViewById(R.id.confirm_button);
@@ -77,7 +87,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
 
         firestoreDB.collection("Cuentas")
-                .document()
+                .document(cuenta.get("AccountName"))
                 .set(cuenta)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
 

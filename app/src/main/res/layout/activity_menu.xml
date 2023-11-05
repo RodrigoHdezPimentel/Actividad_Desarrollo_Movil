@@ -130,7 +130,7 @@
         app:layout_constraintTop_toTopOf="@+id/LimitButT" />
 
     <ImageView
-        android:id="@+id/Flecha"
+        android:id="@+id/confirmar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/ImgFondo"

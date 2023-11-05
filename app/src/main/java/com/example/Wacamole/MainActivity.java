@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                         if (registroEncontrado(task, nameText)) {
-                                            error.setVisibility(View.INVISIBLE);
-                                            goToMenu();
+                                            //buscarCuentaPrincipal(nameText);                                            error.setVisibility(View.INVISIBLE);
+                                            goToMenu(nameText);
                                         } else {
                                             error.setVisibility(View.VISIBLE);
                                             error.setText("USUARIO NO ENCONTRADO");
@@ -84,11 +85,29 @@ public class MainActivity extends AppCompatActivity {
         }
         return encontrado;
     }
-    public void goToMenu(){
-        String username = nameText.getText().toString();
+    String username;
+    public void goToMenu(EditText tv){
         Intent intentToMenu = new Intent(MainActivity.this, menu.class);
         intentToMenu.putExtra("Nombre", username);
         startActivity(intentToMenu);
+    }
+    public void buscarCuentaPrincipal(EditText tv){
+
+        firestoreDB.collection("Cuentas")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Comprobar cual es la cuenta principal
+                            Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
     //public void goToShowCuenta(View view){

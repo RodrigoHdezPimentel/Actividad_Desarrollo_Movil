@@ -50,7 +50,7 @@ String username;
             }
         });
         Cuenta.setVisibility(View.INVISIBLE);
-        ImageView Flecha = findViewById(R.id.Flecha);
+        ImageView Flecha = findViewById(R.id.confirmar);
         Flecha.setVisibility(View.INVISIBLE);
 
         TextView ClickToStart = findViewById(R.id.startbutton);
