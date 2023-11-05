@@ -73,7 +73,7 @@ public class showCuenta extends AppCompatActivity {
                                     LLCuentas.addView(NombreCuenta);
                                 }
                                         //HE AGREGADO QUE SE COLOQUE EL ACCOUNTNAME DE LA CUENTA PRINCIPAL
-                                if(document.get("CuentaPrincipal").equals("true")){
+                                if(document.get("CuentaPrincipal").equals("true") && document.get("UserName").equals(username)){
                                     AccounTextname.setText(document.get("AccountName").toString());
                                 }
                             }
