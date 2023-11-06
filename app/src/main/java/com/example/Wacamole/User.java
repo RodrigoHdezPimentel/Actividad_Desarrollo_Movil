@@ -28,7 +28,8 @@ import java.util.Map;
 public class User extends AppCompatActivity {
 String username;
 FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-
+//Cosas por hacer: DESPUESD EL UPDATE Y DEVOLVERSE DE LA CLASE SHOWCUENTA,
+// MANTERNER CAMBIOS EN LA CLASE USER.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,15 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         Button countselect = findViewById(R.id.SelectCuenta);
         Button confirmUpdate = findViewById(R.id.quitarButMenu);
         Button delete = findViewById(R.id.delete);
-
+        ImageView flecha = findViewById(R.id.flecha);
+        flecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(User.this, menu.class);
+                newIntent.putExtra("Nombre",username);
+                startActivity(newIntent);
+            }
+        });
         //ACÁ SOLO FALTA HACER EL UPDATE AL USUARIO.
         //CAMBIOS MIOS (diego)--------------- ACÄ LO QUE HAGO ES PARA COLOCAR EL EMAIL EN EDIT TEXT
         firestoreDB.collection("Usuarios")
