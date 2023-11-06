@@ -26,7 +26,8 @@
         android:layout_height="0dp"
         android:backgroundTint="@color/button_green"
         android:text="Cambiar de Cuenta"
-        android:textSize="12dp"
+        android:textSize="12sp"
+        app:iconPadding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline38"
         app:layout_constraintEnd_toStartOf="@+id/guideline43"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
@@ -84,7 +85,8 @@
         android:layout_height="0dp"
         android:backgroundTint="@color/button_green"
         android:text="Añadir cuenta"
-        android:textSize="12dp"
+        android:textSize="12sp"
+        app:iconPadding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline38"
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
         app:layout_constraintStart_toStartOf="@+id/guideline42"
@@ -217,7 +219,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.73" />
+        app:layout_constraintGuide_percent="0.74" />
 
     <Button
         android:id="@+id/delete"

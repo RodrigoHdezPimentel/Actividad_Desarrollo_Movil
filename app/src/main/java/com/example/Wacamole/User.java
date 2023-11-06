@@ -17,9 +17,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class User extends AppCompatActivity {
 String username;
@@ -95,7 +99,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 mod.setEnabled(true);
                 delete.setEnabled(false);
                 delete.setVisibility(View.INVISIBLE);
-                updateUser();
+                updateUser(textUsername, textEmial);
             }
         });
         //BOTON DE IR A LA CLASE CUENTA CUANDO LE DAN CLICK AÑADIR CUENTA
@@ -157,7 +161,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 startActivity(goShow);
             }
         });
-//ACÁ LE COLOCO DEBAJO DE LA FOTO DE PERFIL EL ACCOUNTNAME DE LA CUENTA PRINCIPAL DEL USER
+        //ACÁ LE COLOCO DEBAJO DE LA FOTO DE PERFIL EL ACCOUNTNAME DE LA CUENTA PRINCIPAL DEL USER
         // MI UNICA MANERA DE HACER LA COMPROBACION FUE CREAR UN USER NUEVO PORQUE LOS QUE HABIAN EN LA
         //FOTO QUE ME ENVIASTES CREO QUE NINGUNO TENIA EN CUENTA PRINCIPAL "TRUE" XD
 
@@ -183,23 +187,28 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 });
         //-----------------------------------------------------------------
     }
-    public void updateUser(){
+    public void updateUser(TextView name, TextView mail){
+        Map<String, String> User = new HashMap<>();
+        User.put("Username", name.getText().toString());
+        User.put("Email", mail.getText().toString());
         firestoreDB.collection("Usuarios")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .document(username)
+                .set(User)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()                                 ) {
-
-                            }
-                        }
+                    public void onSuccess(Void aVoid) {
+                        // on successful completion of this process
+                        // we are displaying the toast message.
+                        Toast.makeText(User.this, "User has been updated..", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(User.this, "Error", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            // inside on failure method we are
+            // displaying a failure message.
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(User.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     public void deleteUser() {
         firestoreDB.collection("Usuarios").document(username)
