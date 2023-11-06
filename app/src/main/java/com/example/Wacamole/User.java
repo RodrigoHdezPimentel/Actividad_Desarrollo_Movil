@@ -113,8 +113,10 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         goCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean newCuenta=false;
                 Intent goCuenta = new Intent(User.this, Cuenta.class);
                 goCuenta.putExtra("Nombre",username);
+                goCuenta.putExtra("userNew", newCuenta);
                 startActivity(goCuenta);
             }
         });

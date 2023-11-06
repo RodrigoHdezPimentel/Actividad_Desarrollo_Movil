@@ -27,7 +27,8 @@ import java.util.Objects;
 public class Insertar extends AppCompatActivity {
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     TextView error;
-
+    TextView UsernameTextView;
+    TextView EmailTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +55,10 @@ public class Insertar extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void InsertValues() {
+
         //Leemos variables
-        TextView UsernameTextView = findViewById(R.id.DB_UserName);
-        TextView EmailTextView = findViewById(R.id.DB_Email);
+        UsernameTextView = findViewById(R.id.DB_UserName);
+        EmailTextView = findViewById(R.id.DB_Email);
 
         firestoreDB.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -65,7 +67,7 @@ public class Insertar extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             if (!registroEncontrado(task, UsernameTextView)) {
                                 insertarNewuser(UsernameTextView, EmailTextView);
-                                CrearNewAcount(UsernameTextView);
+                                changeToCuenta();
                             } else {
                                 error.setVisibility(View.VISIBLE);
                                 error.setText("NOMBRE DE USUARIO YA EXISTENTE");
@@ -116,7 +118,6 @@ public class Insertar extends AppCompatActivity {
                             Log.d("_Debug", "TODO ON");
                             UsernameTextView.setText("");
                             EmailTextView.setText("");
-                            changeToMain();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -128,31 +129,16 @@ public class Insertar extends AppCompatActivity {
                     });
         }
     }
-    public void CrearNewAcount(TextView name){
-        Map<String, String> cuenta = new HashMap<>();
-        cuenta.put("AccountName", name.getText().toString());
-        cuenta.put("CuentaPrincipal", "true");
-        cuenta.put("FotoPerfil", "0");
-        cuenta.put("Highest Score", "0");
-        cuenta.put("UserName", name.getText().toString());
 
-        firestoreDB.collection("Cuentas")
-                .document(cuenta.get("AccountName"))
-                .set(cuenta)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(Insertar.this, "Exito al crear cuenta", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Insertar.this, "Error al crear cunta", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
     public void changeToMain() {
         Intent nuevoIntent = new Intent(Insertar.this, MainActivity.class);
+        startActivity(nuevoIntent);
+    }
+    public void changeToCuenta() {
+        Boolean newCuenta = true;
+        Intent nuevoIntent = new Intent(Insertar.this, Cuenta.class);
+        nuevoIntent.putExtra("Nombre", UsernameTextView.getText().toString());
+        nuevoIntent.putExtra("userNew", newCuenta);
         startActivity(nuevoIntent);
     }
 }

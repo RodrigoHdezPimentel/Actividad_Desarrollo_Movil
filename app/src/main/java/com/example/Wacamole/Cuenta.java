@@ -27,6 +27,7 @@ import java.util.Objects;
 
 public class Cuenta extends AppCompatActivity {
 String username;
+Boolean firstAccount;
 FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
     @Override
@@ -34,7 +35,10 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuenta);
         Intent usernamerecibido = getIntent();
+        Intent firstRecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
+        firstAccount = firstRecibido.getBooleanExtra("userNew", false);
+
 
         ImageView flecha = findViewById(R.id.flecha);
         flecha.setOnClickListener(new View.OnClickListener() {
@@ -78,13 +82,22 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     }
 
     public void newAccount(EditText name){
-
         Map<String, String> cuenta = new HashMap<>();
-        cuenta.put("AccountName", name.getText().toString());
-        cuenta.put("CuentaPrincipal", "false");//   ACÁ LE DIGO QUE ESA CUENTA NUEVA ES FALSE
-        cuenta.put("FotoPerfil", "0");
-        cuenta.put("Highest Score", "0");
-        cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+        //Si es primera cuenta del usuario, esta se vuelve en la principal
+        if (firstAccount){
+            cuenta.put("AccountName", name.getText().toString());
+            cuenta.put("CuentaPrincipal", "true");//
+            cuenta.put("FotoPerfil", "0");
+            cuenta.put("Highest Score", "0");
+            cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+        }else{
+            cuenta.put("AccountName", name.getText().toString());
+            cuenta.put("CuentaPrincipal", "false");//   ACÁ LE DIGO QUE ESA CUENTA NUEVA ES FALSE
+            cuenta.put("FotoPerfil", "0");
+            cuenta.put("Highest Score", "0");
+            cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+        }
+
 
         firestoreDB.collection("Cuentas")
                 .document(cuenta.get("AccountName"))
@@ -94,9 +107,11 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(Cuenta.this, "Exito al crear cuenta", Toast.LENGTH_SHORT).show();
-                        Intent goUser = new Intent(Cuenta.this, User.class);
-                        goUser.putExtra("Nombre", username);
-                        startActivity(goUser);
+                       if(firstAccount){
+                           changeToMain();
+                       }else{
+                           changeToUser();
+                       }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -117,4 +132,16 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         }
         return encontrado[0];
     }
+
+    public void changeToUser(){
+        Intent goUser = new Intent(Cuenta.this, User.class);
+        goUser.putExtra("Nombre", username);
+        startActivity(goUser);
+    }
+
+    public void changeToMain(){
+        Intent goUser = new Intent(Cuenta.this, MainActivity.class);
+        startActivity(goUser);
+    }
+
 }
