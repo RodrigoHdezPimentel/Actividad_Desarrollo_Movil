@@ -32,22 +32,29 @@ public class showCuenta extends AppCompatActivity {
         setContentView(R.layout.activity_show_cuenta);
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
-        TextView userTextname = findViewById(R.id.Username_Text);
-        userTextname.setText(username);
+        TextView AccounTextname = findViewById(R.id.Username_Text);
+       // AccounTextname.setText(username);
+
+        //SE PODRIA REALIZAR DE DOS MANERAS:
+        //1) COLOCAR EL LOGO DE DELETE AL LADO DEL NOMBRE DE CADA CUENTA.
+        //2). QUE LA PERSONA PRIMERO LE DE CLICK A LA CUENTA Y DESPUES LE DE AL DELETE QUE ESTA ENCIMA DEL PERFIL
+        //EN DONDE ABAJO ESTARÁ EL NOMBRE DEL ACCOUNT QUE ELIGIÓ, ESTO CONLLEVA A QUE CUANDO ELIJA LA CUENTA,
+        //ESA PASA A SER LA PRINCIPAL, Y SI LE DA DELETE, LA PRINCIPAL LA OCUPARÁ LA SIGUIENTE CUENTA.
+        //SOLO PODRÁ ELIMINAR CUANDO HAY MAS DE 1 CUENTA, PORQUE SI ELIMINA TODAS,
+        // NOS TOCARA MANDARLO A CREARSE UN ACCOUNT NAME POR OBLIGACION XD
+
         //Para cuando le den click la flecha, te manda a la clase Cuenta.java
-        ImageView ImgFlecha = findViewById(R.id.Flecha);
+        ImageView ImgFlecha = findViewById(R.id.quitarButMenu);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {
-                Intent intentToMenu = new Intent(showCuenta.this,Cuenta.class);
-                intentToMenu.putExtra("Nombre", username);
-                startActivity(intentToMenu);
+                Intent intentToCuenta = new Intent(showCuenta.this, User.class);
+                intentToCuenta.putExtra("Nombre", username);
+                startActivity(intentToCuenta);
             }
         });
         colorBorde();
 
-        //SOLO FALTARIA REALIZAR EL LLAMADO DE LAS CUENTAS EN LA FIREBASE PARA EL SCROLL
-        //Y EN DONDE DICE Pepito ahí se colocaria el Username DE LA PERSONA QUE INICIO SESION
         LinearLayout LLCuentas = findViewById(R.id.LLCuentas);
         LLCuentas.removeAllViews();
         firestoreDB.collection("Cuentas")
@@ -64,6 +71,10 @@ public class showCuenta extends AppCompatActivity {
                                 if(document.get("UserName").equals(username)){
                                     NombreCuenta.setText(document.get("AccountName").toString());
                                     LLCuentas.addView(NombreCuenta);
+                                }
+                                        //HE AGREGADO QUE SE COLOQUE EL ACCOUNTNAME DE LA CUENTA PRINCIPAL
+                                if(document.get("CuentaPrincipal").equals("true") && document.get("UserName").equals(username)){
+                                    AccounTextname.setText(document.get("AccountName").toString());
                                 }
                             }
                         }

@@ -15,10 +15,10 @@ public class Ajustes extends AppCompatActivity {
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
 
-        ImageView ImgFlecha = findViewById(R.id.Flecha);
+        ImageView ImgFlecha = findViewById(R.id.quitarButMenu);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
             @Override
-            //DESPUES DE DARLE CLICK A LA FLECHA LO MANDARIA A LA CLASE CUENTA
+            //DESPUES DE DARLE CLICK A LA FLECHA LO MANDARIA A LA CLASE MENU
             public void onClick(View view) {
                 Intent nuevoIntent = new Intent(Ajustes.this, menu.class);
                 nuevoIntent.putExtra("Nombre", username);

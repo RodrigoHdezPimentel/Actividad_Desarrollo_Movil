@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light_green"
-    tools:context=".Insertar">
+    tools:context=".Insertar"
+android:background="@color/background_light_green"
+    >
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Text_Hori_In"
@@ -131,21 +132,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DB_Email" />
-    <!--
-    <Button
-        android:id="@+id/backBut"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/backarrow"
-        android:paddingLeft="20dp"
-        android:paddingTop="40dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/BotomArrow"
-        app:layout_constraintEnd_toStartOf="@+id/ArrowRight"
-        app:layout_constraintStart_toStartOf="@+id/ArrowLeft"
-        app:layout_constraintTop_toTopOf="@+id/Boton_Hori_In" />
--->
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/BotomArrow"
         android:layout_width="wrap_content"

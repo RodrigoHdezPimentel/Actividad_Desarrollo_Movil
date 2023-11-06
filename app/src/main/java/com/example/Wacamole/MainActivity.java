@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(View v) {
                                         if (registroEncontrado(task, nameText)) {
                                             error.setVisibility(View.INVISIBLE);
-                                            goToMenu();
+                                            goToMenu(nameText);
                                         } else {
                                             error.setVisibility(View.VISIBLE);
                                             error.setText("USUARIO NO ENCONTRADO");
@@ -84,19 +85,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return encontrado;
     }
-    public void goToMenu(){
-        String username = nameText.getText().toString();
-        Intent intentToMenu = new Intent(MainActivity.this, menu.class);
-        intentToMenu.putExtra("Nombre", username);
-        startActivity(intentToMenu);
-    }
 
-    //public void goToShowCuenta(View view){
-       // Intent intentToMenu = new Intent(MainActivity.this,showCuenta.class);
-        //startActivity(intentToMenu);
-   // }
-    public void toPrueba(){
-        Intent FBIntent = new Intent(MainActivity.this, FireBase_Prueba.class);
-        startActivity(FBIntent);
+    public void goToMenu(EditText tv){
+        Intent intentToMenu = new Intent(MainActivity.this, menu.class);
+        intentToMenu.putExtra("Nombre", tv.getText().toString());
+        startActivity(intentToMenu);
     }
 }

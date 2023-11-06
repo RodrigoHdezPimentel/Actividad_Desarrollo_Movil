@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/topomadriguera" />
@@ -56,24 +56,28 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline22" />
+        app:layout_constraintTop_toTopOf="@+id/guideline22"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/SettingsBut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_green"
+        android:text="Ajustes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
+        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/AcountBut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Cuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
-        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
-        app:layout_constraintTop_toTopOf="@+id/LimitButT" />
-
-    <Button
-        android:id="@+id/SettingsBut"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ajustes"
+        android:backgroundTint="@color/button_green"
         app:layout_constraintBottom_toTopOf="@+id/LimitButB"
         app:layout_constraintEnd_toStartOf="@+id/LimitButR"
         app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
@@ -84,14 +88,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.25854993" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/LimitButB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75786597" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/LimitButLeft"
@@ -113,6 +117,41 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.12" />
+
+    <Button
+        android:id="@+id/cerrarSesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_green"
+        android:text="Cerrar sesión"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/LimitButR"
+        app:layout_constraintStart_toStartOf="@+id/LimitButLeft"
+        app:layout_constraintTop_toTopOf="@+id/LimitButT" />
+
+    <ImageView
+        android:id="@+id/quitarButMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ImgFondo"
+        app:layout_constraintEnd_toStartOf="@+id/guideline36"
+        app:layout_constraintStart_toStartOf="@+id/guideline35"
+        app:layout_constraintTop_toTopOf="@+id/startbutton"
+        app:srcCompat="@drawable/backarrow" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
