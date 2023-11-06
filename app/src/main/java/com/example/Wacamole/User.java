@@ -68,8 +68,6 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
             }
         });
-        TextView nameAccount = findViewById(R.id.AccountName);
-        nameAccount.setText(username);
 
         //Boton eliminar
         delete.setVisibility(View.INVISIBLE);

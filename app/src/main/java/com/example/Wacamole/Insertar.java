@@ -137,7 +137,7 @@ public class Insertar extends AppCompatActivity {
         cuenta.put("UserName", name.getText().toString());
 
         firestoreDB.collection("Cuentas")
-                .document()
+                .document(cuenta.get("AccountName"))
                 .set(cuenta)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
