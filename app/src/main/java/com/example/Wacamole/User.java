@@ -38,10 +38,10 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         EditText textUsername= findViewById(R.id.DB_UserName);
         EditText textEmial = findViewById(R.id.DB_Email);
         Button goCuenta = findViewById(R.id.newAccountBut);
-        Button mod = findViewById(R.id.ModAccount);
+        ImageView mod = findViewById(R.id.ModAccount);
         Button countselect = findViewById(R.id.SelectCuenta);
         Button confirmUpdate = findViewById(R.id.backMenu);
-        Button delete = findViewById(R.id.delete);
+        ImageView delete = findViewById(R.id.delete);
         ImageView flecha = findViewById(R.id.flecha);
         flecha.setOnClickListener(new View.OnClickListener() {
             @Override
