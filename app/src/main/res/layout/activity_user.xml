@@ -68,7 +68,7 @@
         app:srcCompat="@drawable/imagen1" />
 
     <Button
-        android:id="@+id/quitarButMenu"
+        android:id="@+id/backMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/button_green"
@@ -247,7 +247,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline42"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
-        app:layout_constraintTop_toBottomOf="@+id/quitarButMenu"
+        app:layout_constraintTop_toBottomOf="@+id/backMenu"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/backarrow" />
 

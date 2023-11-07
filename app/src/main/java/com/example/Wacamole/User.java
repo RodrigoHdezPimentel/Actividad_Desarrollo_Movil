@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -41,7 +40,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         Button goCuenta = findViewById(R.id.newAccountBut);
         Button mod = findViewById(R.id.ModAccount);
         Button countselect = findViewById(R.id.SelectCuenta);
-        Button confirmUpdate = findViewById(R.id.quitarButMenu);
+        Button confirmUpdate = findViewById(R.id.backMenu);
         Button delete = findViewById(R.id.delete);
         ImageView flecha = findViewById(R.id.flecha);
         flecha.setOnClickListener(new View.OnClickListener() {

@@ -67,7 +67,7 @@ String username;
 
         ImageView ImgFondo = findViewById(R.id.ImgFondo);
 
-        ImageView Flecha = findViewById(R.id.quitarButMenu);
+        ImageView Flecha = findViewById(R.id.backMenu);
 
         ImageView profileimg = findViewById(R.id.ProfileImg);
 
