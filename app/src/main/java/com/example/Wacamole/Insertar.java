@@ -86,7 +86,6 @@ public class Insertar extends AppCompatActivity {
     }
     public boolean registroEncontrado(Task<QuerySnapshot> task, TextView tv) {
         final boolean[] encontrado = {false};
-        Toast.makeText(this, "Entrado", Toast.LENGTH_SHORT).show();
 
         for (QueryDocumentSnapshot document : task.getResult()) {
             if (Objects.equals(document.get("Username"), tv.getText().toString())) {

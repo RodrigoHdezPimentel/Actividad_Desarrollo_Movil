@@ -108,7 +108,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                     public void onSuccess(Void unused) {
                         Toast.makeText(Cuenta.this, "Exito al crear cuenta", Toast.LENGTH_SHORT).show();
                        if(firstAccount){
-                           changeToMain();
+                           changeMenu();
                        }else{
                            changeToUser();
                        }
@@ -139,8 +139,9 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         startActivity(goUser);
     }
 
-    public void changeToMain(){
-        Intent goUser = new Intent(Cuenta.this, MainActivity.class);
+    public void changeMenu(){
+        Intent goUser = new Intent(Cuenta.this, menu.class);
+        goUser.putExtra("Nombre", username);
         startActivity(goUser);
     }
 

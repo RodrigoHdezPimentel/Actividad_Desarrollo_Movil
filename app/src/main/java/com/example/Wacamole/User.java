@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -207,7 +208,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                     public void onSuccess(Void aVoid) {
                         // on successful completion of this process
                         // we are displaying the toast message.
-                        Toast.makeText(User.this, "User has been updated..", Toast.LENGTH_SHORT).show();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             // inside on failure method we are

@@ -77,6 +77,15 @@ public class showCuenta extends AppCompatActivity {
 
                                 if(document.get("UserName").equals(username)){
                                     NombreCuenta.setText(document.get("AccountName").toString());
+                                    NombreCuenta.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            accountName = document.get("AccountName").toString();
+                                            Intent goToCuenta = new Intent(showCuenta.this, User.class);
+                                            goToCuenta.putExtra("Accountname", document.get("AccountName").toString());
+                                            startActivity(goToCuenta);
+                                        }
+                                    });
                                     LLCuentas.addView(NombreCuenta);
                                 }
                                         //HE AGREGADO QUE SE COLOQUE EL ACCOUNTNAME DE LA CUENTA PRINCIPAL
@@ -160,7 +169,6 @@ public void colorBorde(){
 
                                                     // on successful completion of this process
                                                     // we are displaying the toast message.
-                                                    Toast.makeText(showCuenta.this, "User has been updated..", Toast.LENGTH_SHORT).show();
                                                     Intent newIntent = new Intent(showCuenta.this, User.class);
                                                     newIntent.putExtra("Nombre", username);
                                                     startActivity(newIntent);

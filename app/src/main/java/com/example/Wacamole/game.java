@@ -3,6 +3,7 @@ package com.example.Wacamole;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 public class game extends AppCompatActivity {
 
@@ -10,7 +11,6 @@ public class game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
 
     }
 }

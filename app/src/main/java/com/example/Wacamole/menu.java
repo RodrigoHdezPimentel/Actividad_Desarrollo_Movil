@@ -3,6 +3,7 @@ package com.example.Wacamole;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,9 @@ String username;
         setContentView(R.layout.activity_menu);
         Intent usernameRebido = getIntent();
         username = usernameRebido.getStringExtra("Nombre");
-        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+
+        TextView userTextname = findViewById(R.id.userTextViewName);
+        userTextname.setText(username);
 
         Button Ajustes = findViewById(R.id.SettingsBut);
         Ajustes.setVisibility(View.INVISIBLE);
@@ -74,6 +77,7 @@ String username;
 
         Flecha.setVisibility(View.INVISIBLE);
         Flecha.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View v) {
                 Fondo.setBackground(getDrawable(R.color.background_green));
@@ -90,6 +94,7 @@ String username;
         });
 
         profileimg.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View v) {
                 Fondo.setBackground(getDrawable(R.color.background_light_green));
