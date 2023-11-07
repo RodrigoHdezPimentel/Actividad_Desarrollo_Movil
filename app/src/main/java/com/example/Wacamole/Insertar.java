@@ -88,7 +88,7 @@ public class Insertar extends AppCompatActivity {
         final boolean[] encontrado = {false};
 
         for (QueryDocumentSnapshot document : task.getResult()) {
-            if (Objects.equals(document.get("Username"), tv.getText().toString())) {
+            if (Objects.equals(document.get("Username"), tv.getText().toString().trim())) {
                 encontrado[0] = true;
                 break;
             }
@@ -104,8 +104,8 @@ public class Insertar extends AppCompatActivity {
             error.setText("RELLENE TODOS LOS CAMPOS");
         } else {
             Map<String, String> user = new HashMap<>();
-            user.put("Username", UsernameTextView.getText().toString());
-            user.put("Email", EmailTextView.getText().toString());
+            user.put("Username", UsernameTextView.getText().toString().trim());
+            user.put("Email", EmailTextView.getText().toString().trim());
 
             firestoreDB.collection("Usuarios")
                     .document(UsernameTextView.getText().toString())

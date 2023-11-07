@@ -31,6 +31,7 @@ import java.util.Map;
 public class showCuenta extends AppCompatActivity {
     String username;
     String accountName;
+
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class showCuenta extends AppCompatActivity {
        // AccounTextname.setText(username);
         //HECHOOO
 
-        //Para cuando le den click la flecha, te manda a la clase Cuenta.java
+        //Para cuando le den click la flecha, te manda a la clase user.java
         ImageView ImgFlecha = findViewById(R.id.backMenu);
         ImgFlecha.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -80,10 +81,8 @@ public class showCuenta extends AppCompatActivity {
                                     NombreCuenta.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            accountName = document.get("AccountName").toString();
-                                            Intent goToCuenta = new Intent(showCuenta.this, User.class);
-                                            goToCuenta.putExtra("Accountname", document.get("AccountName").toString());
-                                            startActivity(goToCuenta);
+                                            changeAccount(NombreCuenta);
+
                                         }
                                     });
                                     LLCuentas.addView(NombreCuenta);
@@ -145,7 +144,6 @@ public void colorBorde(){
     }
     //actualizo CuentaPrincipal despues de borrar cuenta principal
     public void actualizarCuentaPrincipal(){
-
         firestoreDB.collection("Cuentas")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -196,6 +194,53 @@ public void colorBorde(){
                     }
                 });
     }
+                    public void changeAccount(TextView newAccount){
+                        Toast.makeText(this, newAccount.getText().toString(), Toast.LENGTH_SHORT).show();
+                                Map<String, String> NewCuenta = new HashMap<>();
+                                NewCuenta.put("AccountName", newAccount.getText().toString());
+                                NewCuenta.put("CuentaPrincipal", "true");//
+                                NewCuenta.put("FotoPerfil", "0");
+                                NewCuenta.put("Highest Score", "0");
+                                NewCuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+                                firestoreDB.collection("Cuentas")
+                                        .document(newAccount.getText().toString())
+                                        .set(NewCuenta)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Map<String, String> oldCuenta = new HashMap<>();
+                                                oldCuenta.put("AccountName", accountName);
+                                                oldCuenta.put("CuentaPrincipal", "false");//
+                                                oldCuenta.put("FotoPerfil", "0");
+                                                oldCuenta.put("Highest Score", "0");
+                                                oldCuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+                                               firestoreDB.collection("Cuentas")
+                                                       .document(accountName)
+                                                       .set(oldCuenta).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                           @Override
+                                                           public void onSuccess(Void unused) {
+                                                               Intent newIntent = new Intent(showCuenta.this, User.class);
+                                                               newIntent.putExtra("Nombre", username);
+                                                               startActivity(newIntent);
+                                                           }
+                                                       }).addOnFailureListener(new OnFailureListener() {
+                                                           // inside on failure method we are
+                                                           // displaying a failure message.
+                                                           @Override
+                                                           public void onFailure(@NonNull Exception e) {
+                                                               Toast.makeText(showCuenta.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
+                                                           }
+                                                       });
 
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(showCuenta.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+    }
 }
 
