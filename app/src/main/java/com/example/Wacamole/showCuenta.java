@@ -76,7 +76,12 @@ public class showCuenta extends AppCompatActivity {
                                 NombreCuenta.setTextSize(25);
                                 NombreCuenta.setPadding(0, 10,0,10);
 
-                                if(document.get("UserName").equals(username)){
+                                if(document.get("CuentaPrincipal").equals("true") && document.get("UserName").equals(username)){
+                                    AccounTextname.setText(document.get("AccountName").toString());
+                                    accountName=document.get("AccountName").toString();
+                                }
+
+                                if(document.get("UserName").equals(username) && !document.get("AccountName").equals(accountName)){
                                     NombreCuenta.setText(document.get("AccountName").toString());
                                     NombreCuenta.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -88,10 +93,7 @@ public class showCuenta extends AppCompatActivity {
                                     LLCuentas.addView(NombreCuenta);
                                 }
                                         //HE AGREGADO QUE SE COLOQUE EL ACCOUNTNAME DE LA CUENTA PRINCIPAL
-                                if(document.get("CuentaPrincipal").equals("true") && document.get("UserName").equals(username)){
-                                    AccounTextname.setText(document.get("AccountName").toString());
-                                    accountName=document.get("AccountName").toString();
-                                }
+
                             }
                         }
                     }
