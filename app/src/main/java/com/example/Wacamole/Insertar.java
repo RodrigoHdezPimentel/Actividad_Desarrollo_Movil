@@ -67,7 +67,6 @@ public class Insertar extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             if (!registroEncontrado(task, UsernameTextView)) {
                                 insertarNewuser(UsernameTextView, EmailTextView);
-                                changeToCuenta();
                             } else {
                                 error.setVisibility(View.VISIBLE);
                                 error.setText("NOMBRE DE USUARIO YA EXISTENTE");
@@ -115,8 +114,10 @@ public class Insertar extends AppCompatActivity {
                         public void onSuccess(Void unused) {
                             error.setVisibility(View.INVISIBLE);
                             Log.d("_Debug", "TODO ON");
+                            changeToCuenta();
                             UsernameTextView.setText("");
                             EmailTextView.setText("");
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

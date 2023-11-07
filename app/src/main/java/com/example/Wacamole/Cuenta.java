@@ -38,18 +38,22 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         Intent firstRecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
         firstAccount = firstRecibido.getBooleanExtra("userNew", false);
+        EditText accountName = findViewById(R.id.AccountName);
 
 
         ImageView flecha = findViewById(R.id.flecha);
+        if(firstAccount){
+            flecha.setVisibility(View.INVISIBLE);
+        }
         flecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent toUser = new Intent(Cuenta.this, User.class);
                 toUser.putExtra("Nombre", username);
                 startActivity(toUser);
             }
         });
-        EditText accountName = findViewById(R.id.AccountName);
 
         Button confirmar = findViewById(R.id.confirm_button);
         confirmar.setOnClickListener(new View.OnClickListener() {
@@ -84,41 +88,45 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     public void newAccount(EditText name){
         Map<String, String> cuenta = new HashMap<>();
         //Si es primera cuenta del usuario, esta se vuelve en la principal
-        if (firstAccount){
-            cuenta.put("AccountName", name.getText().toString());
-            cuenta.put("CuentaPrincipal", "true");//
-            cuenta.put("FotoPerfil", "0");
-            cuenta.put("Highest Score", "0");
-            cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+
+        if(name.getText().toString().isEmpty()){
+            Toast.makeText(this, "Coloca un nombre", Toast.LENGTH_SHORT).show();
         }else{
-            cuenta.put("AccountName", name.getText().toString());
-            cuenta.put("CuentaPrincipal", "false");//   ACÁ LE DIGO QUE ESA CUENTA NUEVA ES FALSE
-            cuenta.put("FotoPerfil", "0");
-            cuenta.put("Highest Score", "0");
-            cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+            if (firstAccount){
+                cuenta.put("AccountName", name.getText().toString().trim());
+                cuenta.put("CuentaPrincipal", "true");//
+                cuenta.put("FotoPerfil", "0");
+                cuenta.put("Highest Score", "0");
+                cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+            }else{
+                cuenta.put("AccountName", name.getText().toString().trim());
+                cuenta.put("CuentaPrincipal", "false");//   ACÁ LE DIGO QUE ESA CUENTA NUEVA ES FALSE
+                cuenta.put("FotoPerfil", "0");
+                cuenta.put("Highest Score", "0");
+                cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+            }
+
+            firestoreDB.collection("Cuentas")
+                    .document(cuenta.get("AccountName"))
+                    .set(cuenta)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                        @Override
+                        public void onSuccess(Void unused) {
+                            if(firstAccount){
+                                changeMenu();
+                            }else{
+                                changeToUser();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Cuenta.this, "Error al crear cuenta", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
 
-
-        firestoreDB.collection("Cuentas")
-                .document(cuenta.get("AccountName"))
-                .set(cuenta)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(Cuenta.this, "Exito al crear cuenta", Toast.LENGTH_SHORT).show();
-                       if(firstAccount){
-                           changeMenu();
-                       }else{
-                           changeToUser();
-                       }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Cuenta.this, "Error al crear cuenta", Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
     public boolean registroEncontrado(Task<QuerySnapshot> task, TextView tv) {
         final boolean[] encontrado = {false};
