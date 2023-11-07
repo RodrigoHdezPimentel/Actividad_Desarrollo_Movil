@@ -27,6 +27,7 @@ import java.util.Objects;
 
 public class Cuenta extends AppCompatActivity {
 String username;
+
 Boolean firstAccount;
 FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
@@ -36,7 +37,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_cuenta);
         Intent usernamerecibido = getIntent();
         Intent firstRecibido = getIntent();
-        username = usernamerecibido.getStringExtra("Nombre");
+        username = usernamerecibido.getStringExtra("Nombre").trim();
         firstAccount = firstRecibido.getBooleanExtra("userNew", false);
         EditText accountName = findViewById(R.id.AccountName);
 
@@ -113,6 +114,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
                         @Override
                         public void onSuccess(Void unused) {
+                            Toast.makeText(Cuenta.this, "Cuenta creada", Toast.LENGTH_SHORT).show();
                             if(firstAccount){
                                 changeMenu();
                             }else{

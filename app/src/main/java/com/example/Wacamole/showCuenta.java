@@ -45,7 +45,6 @@ public class showCuenta extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {deleteAccount();
-                actualizarCuentaPrincipal();
             }
         });
        // AccounTextname.setText(username);
@@ -62,7 +61,6 @@ public class showCuenta extends AppCompatActivity {
             }
         });
         colorBorde();
-
         LinearLayout LLCuentas = findViewById(R.id.LLCuentas);
         LLCuentas.removeAllViews();
         firestoreDB.collection("Cuentas")
@@ -135,6 +133,39 @@ public void colorBorde(){
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(showCuenta.this, "Cuenta eliminada", Toast.LENGTH_SHORT).show();
+        firestoreDB.collection("Cuentas").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            boolean noHayCuenta = false;
+
+                            for(QueryDocumentSnapshot documento : task.getResult()){
+                                if(documento.get("UserName").equals(username)){
+                                   noHayCuenta = true;
+                                   break;
+                                }
+                            }
+                            if(noHayCuenta){
+                                actualizarCuentaPrincipal();
+                            }else{
+                                Intent goCuenta = new Intent(showCuenta.this, Cuenta.class);
+                                goCuenta.putExtra("userNew",true);
+                                goCuenta.putExtra("Nombre", username);
+                                startActivity(goCuenta);
+                            }
+
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -197,7 +228,6 @@ public void colorBorde(){
                 });
     }
                     public void changeAccount(TextView newAccount){
-                        Toast.makeText(this, newAccount.getText().toString(), Toast.LENGTH_SHORT).show();
                                 Map<String, String> NewCuenta = new HashMap<>();
                                 NewCuenta.put("AccountName", newAccount.getText().toString());
                                 NewCuenta.put("CuentaPrincipal", "true");//

@@ -198,8 +198,8 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     }
     public void updateUser(TextView name, TextView mail){
         Map<String, String> User = new HashMap<>();
-        User.put("Username", name.getText().toString());
-        User.put("Email", mail.getText().toString());
+        User.put("Username", name.getText().toString().trim());
+        User.put("Email", mail.getText().toString().trim());
         firestoreDB.collection("Usuarios")
                 .document(username)
                 .set(User)
@@ -225,6 +225,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        Toast.makeText(User.this, "Usuario eliminado", Toast.LENGTH_SHORT).show();
                         Intent toMain = new Intent(User.this, MainActivity.class);
                         startActivity(toMain);
                     }
