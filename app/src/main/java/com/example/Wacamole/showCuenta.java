@@ -11,20 +11,28 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class showCuenta extends AppCompatActivity {
     String username;
+    String accountName;
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +41,16 @@ public class showCuenta extends AppCompatActivity {
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
         TextView AccounTextname = findViewById(R.id.Username_Text);
-       // AccounTextname.setText(username);
 
-        //SE PODRIA REALIZAR DE DOS MANERAS:
-        //1) COLOCAR EL LOGO DE DELETE AL LADO DEL NOMBRE DE CADA CUENTA.
-        //2). QUE LA PERSONA PRIMERO LE DE CLICK A LA CUENTA Y DESPUES LE DE AL DELETE QUE ESTA ENCIMA DEL PERFIL
-        //EN DONDE ABAJO ESTARÁ EL NOMBRE DEL ACCOUNT QUE ELIGIÓ, ESTO CONLLEVA A QUE CUANDO ELIJA LA CUENTA,
-        //ESA PASA A SER LA PRINCIPAL, Y SI LE DA DELETE, LA PRINCIPAL LA OCUPARÁ LA SIGUIENTE CUENTA.
-        //SOLO PODRÁ ELIMINAR CUANDO HAY MAS DE 1 CUENTA, PORQUE SI ELIMINA TODAS,
-        // NOS TOCARA MANDARLO A CREARSE UN ACCOUNT NAME POR OBLIGACION XD
+        ImageView delete =  findViewById(R.id.Delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {deleteAccount();
+                actualizarCuentaPrincipal();
+            }
+        });
+       // AccounTextname.setText(username);
+        //HECHOOO
 
         //Para cuando le den click la flecha, te manda a la clase Cuenta.java
         ImageView ImgFlecha = findViewById(R.id.quitarButMenu);
@@ -75,6 +84,7 @@ public class showCuenta extends AppCompatActivity {
                                         //HE AGREGADO QUE SE COLOQUE EL ACCOUNTNAME DE LA CUENTA PRINCIPAL
                                 if(document.get("CuentaPrincipal").equals("true") && document.get("UserName").equals(username)){
                                     AccounTextname.setText(document.get("AccountName").toString());
+                                    accountName=document.get("AccountName").toString();
                                 }
                             }
                         }
@@ -109,6 +119,77 @@ public void colorBorde(){
             (layerDrawable);
 
 }
+//Elimino la cuenta
+    public void deleteAccount() {
+        firestoreDB.collection("Cuentas").document(accountName)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(showCuenta.this, "Cuenta eliminada", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(showCuenta.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    //actualizo CuentaPrincipal despues de borrar cuenta principal
+    public void actualizarCuentaPrincipal(){
+
+        firestoreDB.collection("Cuentas")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if(document.get("CuentaPrincipal").equals("false") && document.get("UserName").equals(username)){
+                                    accountName=document.get("AccountName").toString();
+                                    Map<String, String> cuenta = new HashMap<>();
+                                    cuenta.put("AccountName", accountName);
+                                    cuenta.put("CuentaPrincipal", "true");//
+                                    cuenta.put("FotoPerfil", "0");
+                                    cuenta.put("Highest Score", "0");
+                                    cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
+                                    firestoreDB.collection("Cuentas")
+                                            .document(accountName)
+                                            .set(cuenta)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+
+                                                    // on successful completion of this process
+                                                    // we are displaying the toast message.
+                                                    Toast.makeText(showCuenta.this, "User has been updated..", Toast.LENGTH_SHORT).show();
+                                                    Intent newIntent = new Intent(showCuenta.this, User.class);
+                                                    newIntent.putExtra("Nombre", username);
+                                                    startActivity(newIntent);
+
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                // inside on failure method we are
+                                                // displaying a failure message.
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(showCuenta.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
 
 }
 
