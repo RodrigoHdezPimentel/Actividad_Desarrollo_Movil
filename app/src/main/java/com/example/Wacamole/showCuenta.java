@@ -39,6 +39,7 @@ public class showCuenta extends AppCompatActivity {
         setContentView(R.layout.activity_show_cuenta);
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
+        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
         TextView AccounTextname = findViewById(R.id.Username_Text);
 
         ImageView delete =  findViewById(R.id.Delete);
@@ -95,12 +96,6 @@ public class showCuenta extends AppCompatActivity {
                             }
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
                 });
     }
 
@@ -155,23 +150,9 @@ public void colorBorde(){
                                 goCuenta.putExtra("Nombre", username);
                                 startActivity(goCuenta);
                             }
-
                         }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
                     }
                 });
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(showCuenta.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -205,25 +186,12 @@ public void colorBorde(){
                                                     startActivity(newIntent);
 
                                                 }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                // inside on failure method we are
-                                                // displaying a failure message.
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(showCuenta.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
-                                                }
                                             });
                                     break;
                                 }
 
                             }
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
                     }
                 });
     }
@@ -255,21 +223,7 @@ public void colorBorde(){
                                                                newIntent.putExtra("Nombre", username);
                                                                startActivity(newIntent);
                                                            }
-                                                       }).addOnFailureListener(new OnFailureListener() {
-                                                           // inside on failure method we are
-                                                           // displaying a failure message.
-                                                           @Override
-                                                           public void onFailure(@NonNull Exception e) {
-                                                               Toast.makeText(showCuenta.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
-                                                           }
                                                        });
-
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(showCuenta.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
                                             }
                                         });
 

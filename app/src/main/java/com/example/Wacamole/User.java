@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -53,7 +54,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
             }
         });
         //ACÁ SOLO FALTA HACER EL UPDATE AL USUARIO.
-        //CAMBIOS MIOS (diego)--------------- ACÄ LO QUE HAGO ES PARA COLOCAR EL EMAIL EN EDIT TEXT
+        //CAMBIOS MIOS (diego)--------------- ACÁ LO QUE HAGO ES PARA COLOCAR EL EMAIL EN EDIT TEXT
         firestoreDB.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -200,24 +201,52 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         Map<String, String> User = new HashMap<>();
         User.put("Username", name.getText().toString().trim());
         User.put("Email", mail.getText().toString().trim());
+
         firestoreDB.collection("Usuarios")
-                .document(username)
+                .document(name.getText().toString().trim())
                 .set(User)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        // on successful completion of this process
-                        // we are displaying the toast message.
+                        firestoreDB.collection("Cuentas")
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                if(document.get("UserName").equals(username)){
+                                                    Map<String, String> NewAccount = new HashMap<>();
+                                                    NewAccount.put("AccountName", document.get("AccountName").toString());
+                                                    NewAccount.put("CuentaPrincipal", document.get("CuentaPrincipal").toString());
+                                                    NewAccount.put("FotoPerfil", document.get("FotoPerfil").toString());
+                                                    NewAccount.put("Highest Score", document.get("Highest Score").toString());
+                                                    NewAccount.put("UserName", name.getText().toString());
+                                                    Toast.makeText(User.this, username, Toast.LENGTH_SHORT).show();
 
+                                                    //Borramos la cuanta antigua para actualizar con una buena
+                                                    firestoreDB.collection("Usuarios")
+                                                            .document(username).delete();
+
+
+                                                    //Actualizamos el username de las cuentas
+                                                    firestoreDB.collection("Cuentas")
+                                                            .document(document.get("AccountName").toString())
+                                                            .set(NewAccount);
+                                                }
+                                                firestoreDB.collection("Usuarios")
+                                                        .document(username).delete();
+                                            }
+                                        }
+                                    }
+                                });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-            // inside on failure method we are
-            // displaying a failure message.
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(User.this, "Fail to update the data..", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(User.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        username = name.getText().toString().trim();
     }
     public void deleteUser() {
         firestoreDB.collection("Usuarios").document(username)

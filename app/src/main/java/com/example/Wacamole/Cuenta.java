@@ -72,14 +72,6 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                                     }
                                 }
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-
-                                Toast.makeText(Cuenta.this, "ERROR EN LA CONEXION", Toast.LENGTH_SHORT).show();
-                            }
                         });
 
             }
@@ -120,11 +112,6 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                             }else{
                                 changeToUser();
                             }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Cuenta.this, "Error al crear cuenta", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

@@ -61,15 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                 }
                             });
-
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        error.setVisibility(View.VISIBLE);
-                        error.setText("NO SE PUDO ACCEDER A LA BASE DE DATOS");
                     }
                 });
     }

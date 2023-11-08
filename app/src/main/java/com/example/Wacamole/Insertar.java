@@ -73,14 +73,6 @@ public class Insertar extends AppCompatActivity {
                             }
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        error.setVisibility(View.VISIBLE);
-                        error.setText("ERROR EN LA CONEXION A LA BASE DE DATOS");
-                        Toast.makeText(Insertar.this, "ERROR EN LA CONEXION", Toast.LENGTH_SHORT).show();
-                    }
                 });
     }
     public boolean registroEncontrado(Task<QuerySnapshot> task, TextView tv) {
@@ -118,13 +110,6 @@ public class Insertar extends AppCompatActivity {
                             UsernameTextView.setText("");
                             EmailTextView.setText("");
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            error.setVisibility(View.VISIBLE);
-                            error.setText("ERROR EN LA CONEXION A LA BASE DE DATOS");
-                            Toast.makeText(Insertar.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
