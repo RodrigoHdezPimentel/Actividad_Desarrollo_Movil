@@ -29,12 +29,12 @@ import java.util.Map;
 public class User extends AppCompatActivity {
 String username;
 FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-//Cosas por hacer: DESPUESD EL UPDATE Y DEVOLVERSE DE LA CLASE SHOWCUENTA,
-// MANTERNER CAMBIOS EN LA CLASE USER.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        //Variables de la activity
         Intent usernamerecibido = getIntent();
         username = usernamerecibido.getStringExtra("Nombre");
         EditText textUsername= findViewById(R.id.DB_UserName);
@@ -45,6 +45,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         Button confirmUpdate = findViewById(R.id.backMenu);
         ImageView delete = findViewById(R.id.delete);
         ImageView flecha = findViewById(R.id.flecha);
+        //Volver a la activity anterior
         flecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,8 +54,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 startActivity(newIntent);
             }
         });
-        //ACÁ SOLO FALTA HACER EL UPDATE AL USUARIO.
-        //CAMBIOS MIOS (diego)--------------- ACÁ LO QUE HAGO ES PARA COLOCAR EL EMAIL EN EDIT TEXT
+        //ACÁ LO QUE HAGO ES PARA COLOCAR EL EMAIL EN EDIT TEXT
         firestoreDB.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -70,12 +70,6 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                         }
                     }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
             }
         });
 
@@ -146,35 +140,10 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 mod.setVisibility(View.INVISIBLE);
                 mod.setEnabled(false);
                 delete.setEnabled(true);
-
-
             }
         });
 
-
-        // DAR CLICK A LAS IMGANES PEQUEÑAS TE LLEVA A LA CLASE SHOWCUENTAS
-        ImageView cuentas = findViewById(R.id.cuenta_1);
-        cuentas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goShow = new Intent(User.this, showCuenta.class);
-                goShow.putExtra("Nombre", username);
-                startActivity(goShow);
-            }
-        });
-        cuentas = findViewById(R.id.cuenta_2);
-        cuentas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goShow = new Intent(User.this, showCuenta.class);
-                goShow.putExtra("Nombre", username);
-                startActivity(goShow);
-            }
-        });
         //ACÁ LE COLOCO DEBAJO DE LA FOTO DE PERFIL EL ACCOUNTNAME DE LA CUENTA PRINCIPAL DEL USER
-        // MI UNICA MANERA DE HACER LA COMPROBACION FUE CREAR UN USER NUEVO PORQUE LOS QUE HABIAN EN LA
-        //FOTO QUE ME ENVIASTES CREO QUE NINGUNO TENIA EN CUENTA PRINCIPAL "TRUE" XD
-
         TextView AccounTextname = findViewById(R.id.AccountName);
         firestoreDB.collection("Cuentas")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -188,32 +157,31 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                             }
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(User.this, "No se pudo conectar a la base de datos", Toast.LENGTH_SHORT).show();
-                    }
                 });
-        //-----------------------------------------------------------------
     }
+    //Actualizar usuario junto a sus cuantas
     public void updateUser(TextView name, TextView mail){
+        //Creo un map para hacer el update del user
         Map<String, String> User = new HashMap<>();
         User.put("Username", name.getText().toString().trim());
         User.put("Email", mail.getText().toString().trim());
 
-    if(!username.equals(name.getText().toString())) {
-        firestoreDB.collection("Usuarios")
-            .document(name.getText().toString().trim())
-            .set(User)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    firestoreDB.collection("Cuentas")
+    //Si no hay cambios en el nombre no actualizamos las cuentas
+        if(!username.equals(name.getText().toString())) {
+            //hacemos el update del user
+            firestoreDB.collection("Usuarios")
+                .document(name.getText().toString().trim())
+                .set(User)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //Si va bien actualizamos los username de las cuentas
+                        firestoreDB.collection("Cuentas")
                             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
+                                        //Recorremos las cuentas para encontrar las que pertenecen al antiguo Username y las actualizamos
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             if (document.get("UserName").equals(username)) {
 
@@ -230,6 +198,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                                                         .set(NewAccount);
                                             }
                                         }
+                                        //Eliminamos el antiguo user
                                         firestoreDB.collection("Usuarios")
                                                 .document(username).delete()
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -242,11 +211,16 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                                     }
                                 }
                             });
-                }
+                    }
 
             });
+        //Si no se actualiza el Username, se hace el update del user por si ha cambiado el email
+        }else{
+            firestoreDB.collection("Usuarios")
+                .document(name.getText().toString().trim()).set(User);
+        }
     }
-    }
+    //Elimina el usuario
     public void deleteUser() {
         firestoreDB.collection("Usuarios").document(username)
                 .delete()
@@ -256,11 +230,6 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                         Toast.makeText(User.this, "Usuario eliminado", Toast.LENGTH_SHORT).show();
                         Intent toMain = new Intent(User.this, MainActivity.class);
                         startActivity(toMain);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(User.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

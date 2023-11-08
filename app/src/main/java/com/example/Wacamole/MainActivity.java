@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Variables de la activity
         TextView error = findViewById(R.id.error);
         nameText = findViewById(R.id.nameText);
         Button Login = findViewById(R.id.Login);
-
         Button register = findViewById(R.id.Register);
+        //Te lleva a crear user
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newIntent);
             }
         });
-
+        //Comprueba que el user esta registrado
         firestoreDB.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -52,9 +52,14 @@ public class MainActivity extends AppCompatActivity {
                                 @SuppressLint("SetTextI18n")
                                 @Override
                                 public void onClick(View v) {
+                                        //Si el registro esta en la BD, entra al menu
                                         if (registroEncontrado(task, nameText)) {
                                             error.setVisibility(View.INVISIBLE);
-                                            goToMenu(nameText);
+                                            //Va al menu una vez haces log in
+                                            Intent intentToMenu = new Intent(MainActivity.this, menu.class);
+                                            intentToMenu.putExtra("Nombre", nameText.getText().toString());
+                                            startActivity(intentToMenu);
+                                        //Si no encuentra el usuario, salta error
                                         } else {
                                             error.setVisibility(View.VISIBLE);
                                             error.setText("USUARIO NO ENCONTRADO");
@@ -65,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    //Metodo para encontrar registro duplicado
     public boolean registroEncontrado(Task<QuerySnapshot> task, TextView tv) {
         boolean encontrado = false;
-
+        //Recorre el registro de datos buscando coincidencias
         for (QueryDocumentSnapshot document : task.getResult()) {
             if(Objects.equals(document.get("Username"), tv.getText().toString())){
                 encontrado = true;
@@ -76,11 +81,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return encontrado;
-    }
-
-    public void goToMenu(EditText tv){
-        Intent intentToMenu = new Intent(MainActivity.this, menu.class);
-        intentToMenu.putExtra("Nombre", tv.getText().toString());
-        startActivity(intentToMenu);
     }
 }

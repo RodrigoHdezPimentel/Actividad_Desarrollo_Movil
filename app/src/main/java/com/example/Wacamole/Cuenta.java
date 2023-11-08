@@ -37,26 +37,26 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_cuenta);
         Intent usernamerecibido = getIntent();
         Intent firstRecibido = getIntent();
+        //Variables de la activity
         username = usernamerecibido.getStringExtra("Nombre").trim();
         firstAccount = firstRecibido.getBooleanExtra("userNew", false);
         EditText accountName = findViewById(R.id.AccountName);
-
-
         ImageView flecha = findViewById(R.id.flecha);
+        Button confirmar = findViewById(R.id.confirm_button);
+
+        //Si queremos obligar al usuario a crear una cuenta, escondemos la flecha
         if(firstAccount){
             flecha.setVisibility(View.INVISIBLE);
         }
         flecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent toUser = new Intent(Cuenta.this, User.class);
                 toUser.putExtra("Nombre", username);
                 startActivity(toUser);
             }
         });
-
-        Button confirmar = findViewById(R.id.confirm_button);
+        //Boton para confirmar la creacion de la cuenta
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +65,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
+                                    //Si el registro no esta repetido, se crea la cuenta nueva
                                     if (!registroEncontrado(task, accountName)) {
                                         newAccount(accountName);
                                     } else {
@@ -77,28 +78,26 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
             }
         });
     }
-
+    //Metodo de creacion de cuenta nueva
     public void newAccount(EditText name){
         Map<String, String> cuenta = new HashMap<>();
-        //Si es primera cuenta del usuario, esta se vuelve en la principal
 
+        //Validacion para registros vacios
         if(name.getText().toString().isEmpty()){
             Toast.makeText(this, "Coloca un nombre", Toast.LENGTH_SHORT).show();
         }else{
-            if (firstAccount){
-                cuenta.put("AccountName", name.getText().toString().trim());
-                cuenta.put("CuentaPrincipal", "true");//
-                cuenta.put("FotoPerfil", "0");
-                cuenta.put("Highest Score", "0");
-                cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
-            }else{
-                cuenta.put("AccountName", name.getText().toString().trim());
-                cuenta.put("CuentaPrincipal", "false");//   ACÁ LE DIGO QUE ESA CUENTA NUEVA ES FALSE
-                cuenta.put("FotoPerfil", "0");
-                cuenta.put("Highest Score", "0");
-                cuenta.put("UserName", username); //PARA INDICAR AL USUARIO
-            }
+            cuenta.put("AccountName", name.getText().toString().trim());
+            cuenta.put("FotoPerfil", "0");
+            cuenta.put("Highest Score", "0");
+            cuenta.put("UserName", username);
 
+            //Si es la primera cuenta creada, se asigna como principal
+            if (firstAccount){
+                cuenta.put("CuentaPrincipal", "true");
+            }else{
+                cuenta.put("CuentaPrincipal", "false");
+            }
+            //Creamos la cuenta nueva
             firestoreDB.collection("Cuentas")
                     .document(cuenta.get("AccountName"))
                     .set(cuenta)
@@ -106,40 +105,32 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
                         @Override
                         public void onSuccess(Void unused) {
+                            //Depende de cuando creemos la cuenta, guiamos al usuario a un sitio o a otro
                             Toast.makeText(Cuenta.this, "Cuenta creada", Toast.LENGTH_SHORT).show();
                             if(firstAccount){
-                                changeMenu();
+                                Intent goUser = new Intent(Cuenta.this, menu.class);
+                                goUser.putExtra("Nombre", username);
+                                startActivity(goUser);
                             }else{
-                                changeToUser();
+                                Intent goUser = new Intent(Cuenta.this, User.class);
+                                goUser.putExtra("Nombre", username);
+                                startActivity(goUser);
                             }
                         }
                     });
         }
-
     }
+    //Metodo para buscar registrosduplicados
     public boolean registroEncontrado(Task<QuerySnapshot> task, TextView tv) {
-        final boolean[] encontrado = {false};
-
+        boolean encontrado = false;
+        //Leemos los registros buscando coincidencias
         for (QueryDocumentSnapshot document : task.getResult()) {
             if (Objects.equals(document.get("AccountName"), tv.getText().toString())) {
-                encontrado[0] = true;
+                encontrado = true;
                 break;
             }
-
         }
-        return encontrado[0];
-    }
-
-    public void changeToUser(){
-        Intent goUser = new Intent(Cuenta.this, User.class);
-        goUser.putExtra("Nombre", username);
-        startActivity(goUser);
-    }
-
-    public void changeMenu(){
-        Intent goUser = new Intent(Cuenta.this, menu.class);
-        goUser.putExtra("Nombre", username);
-        startActivity(goUser);
+        return encontrado;
     }
 
 }

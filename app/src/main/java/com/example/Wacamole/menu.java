@@ -19,12 +19,21 @@ String username;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         Intent usernameRebido = getIntent();
+        //Variables de la activity
         username = usernameRebido.getStringExtra("Nombre");
-
+        ConstraintLayout Fondo = findViewById(R.id.Fondo);
+        ImageView ImgFondo = findViewById(R.id.ImgFondo);
+        ImageView Flecha = findViewById(R.id.backMenu);
+        ImageView profileimg = findViewById(R.id.ProfileImg);
         TextView userTextname = findViewById(R.id.userTextViewName);
+        TextView ClickToStart = findViewById(R.id.startbutton);
+        Button Ajustes = findViewById(R.id.SettingsBut);
+        Button Cuenta = findViewById(R.id.AcountBut);
+        Button CerrarSesion = findViewById(R.id.cerrarSesion);
+
         userTextname.setText(username);
 
-        Button Ajustes = findViewById(R.id.SettingsBut);
+        //Boton a settings
         Ajustes.setVisibility(View.INVISIBLE);
         Ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,8 +44,8 @@ String username;
                 startActivity(intentToSetting);
             }
         });
+
         //Ir a ajustes cuenta
-        Button Cuenta = findViewById(R.id.AcountBut);
         Cuenta.setVisibility(View.INVISIBLE);
         Cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +55,8 @@ String username;
                 startActivity(intentToCuenta);
             }
         });
+
         //Cerrar sesion y te lleva al main
-        Button CerrarSesion = findViewById(R.id.cerrarSesion);
         CerrarSesion.setVisibility(View.INVISIBLE);
         CerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +65,7 @@ String username;
                 startActivity(intentToMain);
             }
         });
-
-        TextView ClickToStart = findViewById(R.id.startbutton);
+        //Boton para empezar el juego
         ClickToStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,16 +73,7 @@ String username;
                 startActivity(intentToGame);
             }
         });
-
-        ConstraintLayout Fondo = findViewById(R.id.Fondo);
-
-        ImageView ImgFondo = findViewById(R.id.ImgFondo);
-
-        ImageView Flecha = findViewById(R.id.backMenu);
-
-        ImageView profileimg = findViewById(R.id.ProfileImg);
-
-
+        //Flecha quitar las opciones de cuenta, ajustes y cerrar sesion
         Flecha.setVisibility(View.INVISIBLE);
         Flecha.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
@@ -92,7 +91,7 @@ String username;
                 profileimg.setEnabled(true);
             }
         });
-
+        //Boton para mostrar las opciones de cuenta, ajustes y cerrar sesion
         profileimg.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
