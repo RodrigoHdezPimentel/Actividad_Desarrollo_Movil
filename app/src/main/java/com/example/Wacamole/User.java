@@ -227,9 +227,24 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(User.this, "Usuario eliminado", Toast.LENGTH_SHORT).show();
-                        Intent toMain = new Intent(User.this, MainActivity.class);
-                        startActivity(toMain);
+                        firestoreDB.collection("Cuentas").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot list) {
+                                //Recorremos en los documentos y buscamos en los UserName del usuario que se eliminó
+                                for(QueryDocumentSnapshot document : list){
+
+                                    if(document.get("UserName").toString().equals(username)){
+                                        //Eliminamos las cuentas del usuario eliminado
+                                        firestoreDB.collection("Cuentas")
+                                                .document(document.get("AccountName").toString()).delete();
+                                    }
+                                }
+                               Toast.makeText(User.this, "Usuario eliminado", Toast.LENGTH_SHORT).show();
+                                Intent toMain = new Intent(User.this, MainActivity.class);
+                                startActivity(toMain);
+                            }
+                        });
+                        
                     }
                 });
     }
