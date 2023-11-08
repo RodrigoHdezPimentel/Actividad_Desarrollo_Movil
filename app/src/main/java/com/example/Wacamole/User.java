@@ -202,51 +202,50 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         User.put("Username", name.getText().toString().trim());
         User.put("Email", mail.getText().toString().trim());
 
+    if(!username.equals(name.getText().toString())) {
         firestoreDB.collection("Usuarios")
-                .document(name.getText().toString().trim())
-                .set(User)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        firestoreDB.collection("Cuentas")
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                                if(document.get("UserName").equals(username)){
-                                                    Map<String, String> NewAccount = new HashMap<>();
-                                                    NewAccount.put("AccountName", document.get("AccountName").toString());
-                                                    NewAccount.put("CuentaPrincipal", document.get("CuentaPrincipal").toString());
-                                                    NewAccount.put("FotoPerfil", document.get("FotoPerfil").toString());
-                                                    NewAccount.put("Highest Score", document.get("Highest Score").toString());
-                                                    NewAccount.put("UserName", name.getText().toString());
-                                                    Toast.makeText(User.this, username, Toast.LENGTH_SHORT).show();
+            .document(name.getText().toString().trim())
+            .set(User)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    firestoreDB.collection("Cuentas")
+                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            if (document.get("UserName").equals(username)) {
 
-                                                    //Borramos la cuanta antigua para actualizar con una buena
-                                                    firestoreDB.collection("Usuarios")
-                                                            .document(username).delete();
+                                                Map<String, String> NewAccount = new HashMap<>();
+                                                NewAccount.put("AccountName", document.get("AccountName").toString());
+                                                NewAccount.put("CuentaPrincipal", document.get("CuentaPrincipal").toString());
+                                                NewAccount.put("FotoPerfil", document.get("FotoPerfil").toString());
+                                                NewAccount.put("Highest Score", document.get("Highest Score").toString());
+                                                NewAccount.put("UserName", name.getText().toString());
 
-
-                                                    //Actualizamos el username de las cuentas
-                                                    firestoreDB.collection("Cuentas")
-                                                            .document(document.get("AccountName").toString())
-                                                            .set(NewAccount);
-                                                }
-                                                firestoreDB.collection("Usuarios")
-                                                        .document(username).delete();
+                                                //Actualizamos el username de las cuentas
+                                                firestoreDB.collection("Cuentas")
+                                                        .document(document.get("AccountName").toString())
+                                                        .set(NewAccount);
                                             }
                                         }
+                                        firestoreDB.collection("Usuarios")
+                                                .document(username).delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        username = name.getText().toString().trim();
+
+                                                    }
+                                                });
                                     }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(User.this, "Error", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        username = name.getText().toString().trim();
+                                }
+                            });
+                }
+
+            });
+    }
     }
     public void deleteUser() {
         firestoreDB.collection("Usuarios").document(username)
