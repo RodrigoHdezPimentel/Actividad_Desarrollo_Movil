@@ -76,8 +76,22 @@ public class showCuenta extends AppCompatActivity {
                                 TextView NombreCuenta = new TextView(showCuenta.this);
                                 NombreCuenta.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                                 NombreCuenta.setTextSize(25);
-                                NombreCuenta.setPadding(0, 10,0,10);
+                                NombreCuenta.setPadding(0, 25,0,25);
+                                NombreCuenta.setTextColor(getResources().getColor(R.color.white)); // Cambia el color del texto a blanco
 
+                                ShapeDrawable backgroundDrawable = new ShapeDrawable(new RectShape());
+                                backgroundDrawable.getPaint().setColor(getColor(R.color.background_Superdark_green));
+
+                                ShapeDrawable borderDrawable = new ShapeDrawable(new RectShape());
+                                borderDrawable.getPaint().setStrokeWidth(12f);
+                                borderDrawable.getPaint().setStyle(Paint.Style.STROKE);
+                                borderDrawable.getPaint().setColor(getResources().getColor(R.color.background_dark_green));
+
+                                Drawable[] layers = {backgroundDrawable, borderDrawable};
+                                LayerDrawable layerDrawable = new LayerDrawable(layers);
+
+                                NombreCuenta.setBackground
+                                        (layerDrawable);
                                 if(document.get("CuentaPrincipal").equals("true") && document.get("UserName").equals(username)){
                                     AccounTextname.setText(document.get("AccountName").toString());
                                     accountName=document.get("AccountName").toString();
