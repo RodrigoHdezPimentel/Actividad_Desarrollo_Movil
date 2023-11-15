@@ -75,6 +75,23 @@
         app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
 
     <ImageView
+        android:id="@+id/Topo2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toStartOf="@+id/Topo3"
+        app:layout_constraintStart_toEndOf="@+id/Topo1"
+        app:layout_constraintTop_toTopOf="@+id/guideline19"
+        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+
+    <ImageView
+        android:id="@+id/Topo3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline19"
+        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+
+    <ImageView
         android:id="@+id/Topo4"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -127,20 +144,4 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
 
-    <ImageView
-        android:id="@+id/Topo2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/Topo3"
-        app:layout_constraintStart_toEndOf="@+id/Topo1"
-        app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
-
-    <ImageView
-        android:id="@+id/Topo3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline17"
-        app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
 </androidx.constraintlayout.widget.ConstraintLayout>

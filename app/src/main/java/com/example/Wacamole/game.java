@@ -3,13 +3,10 @@ package com.example.Wacamole;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.transition.Transition;
-import android.transition.TransitionValues;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class game extends AppCompatActivity implements Runnable{
     public static final int MAX_TIEMPO = 5;
     private Thread hilo;
-    private boolean isOn = false;
+    public static boolean isOn = false;
     private TextView segundos;
     private Button boton;
     private int numSegundos = 0;
@@ -33,34 +30,42 @@ public class game extends AppCompatActivity implements Runnable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //Animaciones de aparecer y desaparecer
         disappear = AnimationUtils.loadAnimation(game.this, R.anim.disappeard);
         appear = AnimationUtils.loadAnimation(game.this, R.anim.show);
-
+        //Array de topos
         topos = new ImageView[]{findViewById(R.id.Topo1), findViewById(R.id.Topo2), findViewById(R.id.Topo3)
                 , findViewById(R.id.Topo4), findViewById(R.id.Topo5), findViewById(R.id.Topo6)
                 , findViewById(R.id.Topo7), findViewById(R.id.Topo8), findViewById(R.id.Topo9)};
 
+        //Contador de puntos
         TextView contador = findViewById(R.id.contador);
         contador.setText("0 0 0 0");
         final int[] puntuacion = {0};
 
+        //Escondemos los topos
         for (ImageView topo: topos) {
             topo.setVisibility(View.INVISIBLE);
         }
-
+        //Cronometro
         segundos = findViewById(R.id.textViewSegundos);
 
+        //Boton para empezar
         boton = findViewById(R.id.buttonPush);
         boton.setText("Play");
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Restablecemos variables
                 contador.setText("0 0 0 0");
                 puntuacion[0] = 0;
 
-                for (ImageView topo: topos) {
-                    topo.startAnimation(appear);
-                    topo.setOnClickListener(new View.OnClickListener() {
+                for (int x = 0; x < topos.length; x++) {
+                    //Lanzamos los topos
+                    Topo newTopo = new Topo(appear, disappear, x, topos[x]);
+                    newTopo.start();
+                    //Cuando se clique un topo, se sumará un punto
+                    topos[x].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             puntuacion[0]++;
@@ -68,12 +73,11 @@ public class game extends AppCompatActivity implements Runnable{
                                 contador.setText("0 0 0 " + puntuacion[0]);
                             }else if(puntuacion[0] < 100){
                                 contador.setText("0 0 " + String.valueOf(puntuacion[0]).charAt(0) + " " + String.valueOf(puntuacion[0]).charAt(1));
-
+                            }else if(puntuacion[0] < 1000){
+                                contador.setText("0 " + String.valueOf(puntuacion[0]).charAt(0) + " " + String.valueOf(puntuacion[0]).charAt(1));
                             }
-
                         }
                     });
-                    topo.setVisibility(View.VISIBLE);
                 }
 
                 if(!isOn) {
@@ -86,6 +90,9 @@ public class game extends AppCompatActivity implements Runnable{
                     iniciarCronometro();
 
                 }else {
+                    for(ImageView topo : topos){
+                        topo.setEnabled(true);
+                    }
                     isOn = false;
                     Log.d("tiempo", "estado = " + isOn);
                     boton.setText("Play");

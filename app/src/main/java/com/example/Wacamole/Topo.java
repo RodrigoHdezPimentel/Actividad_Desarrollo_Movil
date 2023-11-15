@@ -5,22 +5,43 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Topo extends Thread{
+import java.util.Random;
+
+public class Topo extends Thread {
     Animation appear;
     Animation disappeard;
-    private int id;
+    private int Id;
     private ImageView topo;
-    private int contador;
 
-    public void run(){
-        topo.startAnimation(appear);
+    public Topo (Animation ap, Animation disap,  int id, ImageView img){
+        this.appear = ap;
+        this.disappeard = disap;
+        this.Id = id;
+        this.topo = img;
+    }
+
+    public void run() {
         topo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contador++;
                 topo.startAnimation(disappeard);
                 topo.setTranslationY(200);
             }
         });
+        while (game.isOn) {
+            try {
+                Random rm = new Random();
+                sleep(200 + rm.nextInt(4000));
+                topo.startAnimation(appear);
+                sleep(300);
+                topo.setVisibility(View.VISIBLE);
+                sleep(800 + rm.nextInt(1000));
+                topo.startAnimation(disappeard);
+                sleep(300);
+                topo.setVisibility(View.INVISIBLE);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
