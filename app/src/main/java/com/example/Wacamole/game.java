@@ -3,10 +3,13 @@ package com.example.Wacamole;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionValues;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,14 +23,18 @@ public class game extends AppCompatActivity implements Runnable{
     private boolean isOn = false;
     private TextView segundos;
     private Button boton;
-    //private int numDecimales = 0;
     private int numSegundos = 0;
     ImageView[] topos;
+    Animation appear;
+    Animation disappear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        disappear = AnimationUtils.loadAnimation(game.this, R.anim.disappeard);
+        appear = AnimationUtils.loadAnimation(game.this, R.anim.show);
 
         topos = new ImageView[]{findViewById(R.id.Topo1), findViewById(R.id.Topo2), findViewById(R.id.Topo3)
                 , findViewById(R.id.Topo4), findViewById(R.id.Topo5), findViewById(R.id.Topo6)
@@ -51,7 +58,6 @@ public class game extends AppCompatActivity implements Runnable{
                 contador.setText("0 0 0 0");
                 puntuacion[0] = 0;
 
-                Animation appear = AnimationUtils.loadAnimation(game.this, R.anim.show);
                 for (ImageView topo: topos) {
                     topo.startAnimation(appear);
                     topo.setOnClickListener(new View.OnClickListener() {
@@ -132,11 +138,9 @@ public class game extends AppCompatActivity implements Runnable{
 
             }
             for (ImageView topo: topos) {
-                Animation disappeard = AnimationUtils.loadAnimation(game.this, R.anim.disappeard);
-                topo.startAnimation(disappeard);
+                topo.startAnimation(disappear);
                 topo.setVisibility(View.INVISIBLE);
             }
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

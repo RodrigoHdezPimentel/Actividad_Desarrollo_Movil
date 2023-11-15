@@ -7,7 +7,7 @@
     android:duration="600"
     />
     <translate
-        android:fromXDelta="0%p" android:toYDelta="7%p"
+        android:fromXDelta="0%p" android:toYDelta="200px"
         android:duration = "800"
         />
 </set>
