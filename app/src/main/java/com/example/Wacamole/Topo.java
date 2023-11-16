@@ -19,18 +19,16 @@ public class Topo extends Thread {
     }
 
     public void run() {
-        topo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                topo.startAnimation(disappeard);
-            }
-        });
+
         while (game.isOn) {
             try {
                 Random rm = new Random();
-                sleep(200 + rm.nextInt(2000));
-                topo.startAnimation(appear);
-                sleep(200);
+                Thread.sleep(700 + rm.nextInt(8000));
+                if(game.isOn) {
+                    topo.startAnimation(appear);
+                    topo.setEnabled(true);
+                }
+                Thread.sleep(100);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
