@@ -37,7 +37,7 @@ public class game extends AppCompatActivity implements Runnable{
         topos = new ImageView[]{findViewById(R.id.Topo1), findViewById(R.id.Topo2), findViewById(R.id.Topo3)
                 , findViewById(R.id.Topo4), findViewById(R.id.Topo5), findViewById(R.id.Topo6)
                 , findViewById(R.id.Topo7), findViewById(R.id.Topo8), findViewById(R.id.Topo9)};
-
+        Topo[] HilosTopos = new Topo[topos.length];
         //Contador de puntos
         TextView contador = findViewById(R.id.contador);
         contador.setText("0 0 0 0");
@@ -45,7 +45,7 @@ public class game extends AppCompatActivity implements Runnable{
 
         //Escondemos los topos
         for (ImageView topo: topos) {
-            topo.setVisibility(View.INVISIBLE);
+            //topo.setVisibility(View.INVISIBLE);
         }
         //Cronometro
         segundos = findViewById(R.id.textViewSegundos);
@@ -62,8 +62,7 @@ public class game extends AppCompatActivity implements Runnable{
 
                 for (int x = 0; x < topos.length; x++) {
                     //Lanzamos los topos
-                    Topo newTopo = new Topo(appear, disappear, x, topos[x]);
-                    newTopo.start();
+                    Topo newTopo = new Topo(appear, disappear, topos[x]);
                     //Cuando se clique un topo, se sumará un punto
                     topos[x].setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -78,7 +77,16 @@ public class game extends AppCompatActivity implements Runnable{
                             }
                         }
                     });
+                    HilosTopos[x] = newTopo;
+                    newTopo.start();
                 }
+                /*for (int x = 0; x < HilosTopos.length; x++) {
+                    try {
+                        HilosTopos[x].join();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }*/
 
                 if(!isOn) {
                     numSegundos = MAX_TIEMPO;
@@ -90,9 +98,6 @@ public class game extends AppCompatActivity implements Runnable{
                     iniciarCronometro();
 
                 }else {
-                    for(ImageView topo : topos){
-                        topo.setEnabled(true);
-                    }
                     isOn = false;
                     Log.d("tiempo", "estado = " + isOn);
                     boton.setText("Play");
