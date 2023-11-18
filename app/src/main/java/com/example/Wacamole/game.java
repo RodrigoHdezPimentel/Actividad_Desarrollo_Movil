@@ -1,6 +1,5 @@
 package com.example.Wacamole;
 
-
 /*Cosas que hacer:
 Primero: al final del while en el run del cronometro(Al final del codigo) hacer un intent a una actividad
     que te muestre tu puntuacion y tenga un boton para ver la clasificacion de puntos global, te permita
@@ -14,8 +13,10 @@ Segundo: Cambiar el boton de arriba en medio por un TextView que empiece poniend
 Tercero: hacer la consulta para el podio
  */
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,26 +25,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
+import android.widget.Toast;
 
 public class game extends AppCompatActivity implements Runnable{
-    public static final int MAX_TIEMPO = 20;
+    public static final int MAX_TIEMPO = 5;
     private Thread hilo;
     public static boolean isOn = false;
     private TextView segundos;
-    private Button boton;
+    private TextView start;
     private int numSegundos = 0;
     ImageView[] topos;
     Animation appear;
     Animation disappear;
     int puntuacion = 0;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Intent recibrCuenta = getIntent();
+        username = recibrCuenta.getStringExtra("Nombre");
+
+        ImageView game = findViewById(R.id.background);
+        game.setAlpha(0.3f);
+
 
         //Animaciones de aparecer y desaparecer
         disappear = AnimationUtils.loadAnimation(game.this, R.anim.disappeard);
@@ -80,11 +87,13 @@ public class game extends AppCompatActivity implements Runnable{
         segundos = findViewById(R.id.textViewSegundos);
 
         //Boton para empezar
-        boton = findViewById(R.id.buttonPush);
-        boton.setText("Play");
-        boton.setOnClickListener(new View.OnClickListener() {
+        start = findViewById(R.id.buttonPush);
+        start.setText("click to start");
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                start.setVisibility(View.INVISIBLE);
+                game.setAlpha(1f);
                 //Restablecemos variables
                 contador.setText("0 0 0 0");
                 puntuacion = 0;
@@ -97,13 +106,13 @@ public class game extends AppCompatActivity implements Runnable{
 
                     isOn = true;
                     //Log.d("tiempo", "estado = "+ isOn);
-                    boton.setText("Stop");
+                    start.setText("Stop");
                     iniciarCronometro();
 
                 }else {
                     isOn = false;
                     //Log.d("tiempo", "estado = " + isOn);
-                    boton.setText("Play");
+                    start.setText("Play");
                     detenerCronometro();
                 }
             }
@@ -142,15 +151,18 @@ public class game extends AppCompatActivity implements Runnable{
                             segundos.setText(String.valueOf(numSegundos));
                         }
                         if(numSegundos == 0){
-                            boton.setText("Play");
+                            start.setText("Play");
                             isOn = false;
                         }
                         numSegundos--;
                     }
                 });
                 Thread.sleep(1000);
-
             }
+            Intent toResultado = new Intent(this, resultado.class);
+            toResultado.putExtra("Nombre", username);
+            toResultado.putExtra("puntuacion", Integer.toString(puntuacion));
+            startActivity(toResultado);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

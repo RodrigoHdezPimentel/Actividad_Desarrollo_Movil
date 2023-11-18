@@ -38,7 +38,6 @@ String username;
         Ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intentToSetting = new Intent(menu.this, Ajustes.class);
                 intentToSetting.putExtra("Nombre", username);
                 startActivity(intentToSetting);
@@ -70,6 +69,7 @@ String username;
             @Override
             public void onClick(View v) {
                 Intent intentToGame = new Intent(menu.this, game.class);
+                intentToGame.putExtra("Nombre", username);
                 startActivity(intentToGame);
             }
         });
