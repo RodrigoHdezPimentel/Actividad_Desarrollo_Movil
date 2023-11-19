@@ -7,8 +7,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Variables de la activity
+        ImageView image = findViewById(R.id.Portada);
         TextView error = findViewById(R.id.error);
         nameText = findViewById(R.id.nameText);
         Button Login = findViewById(R.id.Login);
         Button register = findViewById(R.id.Register);
+
+        //animacion
+        Animation slideAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_animation);
+        image.startAnimation(slideAnimation);
         //Te lleva a crear user
         register.setOnClickListener(new View.OnClickListener() {
             @Override

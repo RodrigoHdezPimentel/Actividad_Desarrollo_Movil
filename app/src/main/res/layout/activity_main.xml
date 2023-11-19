@@ -13,13 +13,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/logo_del_la_aplicacion_un_topo"
-        app:layout_constraintBottom_toBottomOf="@+id/nameText"
+        app:layout_constraintBottom_toTopOf="@+id/guideline44"
         app:layout_constraintEnd_toStartOf="@+id/margen_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/margen_left"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline41"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/img_botom"
@@ -125,5 +125,19 @@
         app:layout_constraintEnd_toStartOf="@+id/margen_right"
         app:layout_constraintStart_toStartOf="@+id/margen_left"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

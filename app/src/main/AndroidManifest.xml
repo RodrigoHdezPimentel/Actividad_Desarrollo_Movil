@@ -10,8 +10,11 @@
         android:label="Wacamole"
         android:roundIcon="@mipmap/ic_launcher_foreground_topo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Wacamole"
+        android:theme="@style/Wacamole"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashScreem.Main_splash"
+            android:exported="false" />
         <activity
             android:name=".resultado"
             android:exported="false" />

@@ -74,7 +74,7 @@
         android:layout_height="80dp"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo2"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toStartOf="@+id/Topo3"
         app:layout_constraintStart_toEndOf="@+id/Topo1"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo3"
@@ -91,7 +91,7 @@
         android:layout_height="80dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo4"
@@ -100,7 +100,7 @@
         app:layout_constraintBottom_toTopOf="@+id/Topo7"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
         app:layout_constraintTop_toBottomOf="@+id/Topo1"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo5"
@@ -110,7 +110,7 @@
         app:layout_constraintEnd_toStartOf="@+id/Topo6"
         app:layout_constraintStart_toEndOf="@+id/Topo4"
         app:layout_constraintTop_toBottomOf="@+id/Topo2"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo6"
@@ -119,7 +119,7 @@
         app:layout_constraintBottom_toTopOf="@+id/Topo9"
         app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toBottomOf="@+id/Topo3"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo7"
@@ -127,7 +127,7 @@
         android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo8"
@@ -136,7 +136,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/Topo9"
         app:layout_constraintStart_toEndOf="@+id/Topo7"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <ImageView
         android:id="@+id/Topo9"
@@ -144,7 +144,7 @@
         android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/guideline17"
-        app:srcCompat="@drawable/_9aeb65732bcd87615d27985" />
+        app:srcCompat="@drawable/fondomain" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline40"

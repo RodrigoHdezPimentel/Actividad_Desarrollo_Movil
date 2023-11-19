@@ -75,6 +75,8 @@ public class resultado extends AppCompatActivity {
             public void onClick(View view) {
                 Intent toMenu = new Intent(resultado.this, menu.class);
                 toMenu.putExtra("Nombre", username);
+                startActivity(toMenu);
+
             }
         });
     }
