@@ -2,10 +2,10 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
 <translate
-    android:fromXDelta="500"
+    android:fromXDelta="600"
     android:toXDelta="0"
     android:repeatMode="reverse"
-    android:duration="1000"
+    android:duration="800"
     android:interpolator="@android:anim/linear_interpolator"
 
     />
