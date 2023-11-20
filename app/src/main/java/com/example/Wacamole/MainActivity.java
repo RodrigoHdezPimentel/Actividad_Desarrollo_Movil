@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,15 +35,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Variables de la activity
-        ImageView image = findViewById(R.id.Portada);
+        ImageView martillo = findViewById(R.id.martillo);
+        ImageView topoPortada = findViewById(R.id.Portada);
+        ImageView kaboom = findViewById(R.id.kaboom);
+
         TextView error = findViewById(R.id.error);
         nameText = findViewById(R.id.nameText);
         Button Login = findViewById(R.id.Login);
         Button register = findViewById(R.id.Register);
 
         //animacion
+
         Animation slideAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_animation);
-        image.startAnimation(slideAnimation);
+        topoPortada.startAnimation(slideAnimation);
+        martillo.startAnimation(slideAnimation);
+
+        Animation hide = AnimationUtils.loadAnimation(MainActivity.this, R.anim.disappeard);
+        Animation show = AnimationUtils.loadAnimation(this, R.anim.show);
+        show.setDuration(300);
+        hide.setDuration(400);
+        kaboom.setVisibility(View.INVISIBLE);
+        topoPortada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation shakeAnimation =  AnimationUtils.loadAnimation(MainActivity.this, R.anim.shake);
+                martillo.startAnimation(shakeAnimation);
+
+                kaboom.startAnimation(show);
+                kaboom.startAnimation(hide);
+
+            }
+
+        });
+
+        // Aplicar la AnimationSet a la variable martillo
+
         //Te lleva a crear user
         register.setOnClickListener(new View.OnClickListener() {
             @Override
