@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newIntent = new Intent(MainActivity.this, Insertar.class);
+                Intent newIntent = new Intent(MainActivity.this, TablaTop.class);
                 startActivity(newIntent);
             }
         });

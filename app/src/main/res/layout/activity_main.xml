@@ -120,8 +120,8 @@
         android:textSize="19sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/Portada"
         app:layout_constraintEnd_toStartOf="@+id/margen_right"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/margen_left"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
