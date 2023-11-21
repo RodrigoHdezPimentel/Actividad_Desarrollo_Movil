@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,24 +41,27 @@ public class resultado extends AppCompatActivity {
         result.setText("Tu puntuacion: " + puntuacion);
 
         FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-        firestoreDB.collection("Cuentas")
-                .document(username).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot perfil = task.getResult();
-                        if(Integer.parseInt((perfil).get("Highest Score").toString()) < Integer.parseInt(puntuacion)){
-                            newBest.setVisibility(View.VISIBLE);
-                            Map<String, String> cuenta = new HashMap<>();
-                            cuenta.put("AccountName", perfil.get("AccountName").toString());
-                            cuenta.put("CuentaPrincipal", perfil.get("CuentaPrincipal").toString());
-                            cuenta.put("FotoPerfil", perfil.get("FotoPerfil").toString());
-                            cuenta.put("Highest Score", puntuacion);
-                            cuenta.put("UserName", perfil.get("UserName").toString());
 
-                            firestoreDB.collection("Cuentas")
-                                    .document(username)
-                                    .set(cuenta);
+        firestoreDB.collection("Cuentas").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            if (doc.get("UserName").equals(username) && doc.get("CuentaPrincipal").equals("true")) {
+                                if (Integer.parseInt(doc.get("Highest Score").toString()) < Integer.parseInt(puntuacion)) {
+                                    newBest.setVisibility(View.VISIBLE);
+                                    Map<String, String> cuenta = new HashMap<>();
+                                    cuenta.put("AccountName", doc.get("AccountName").toString());
+                                    cuenta.put("CuentaPrincipal", doc.get("CuentaPrincipal").toString());
+                                    cuenta.put("FotoPerfil", doc.get("FotoPerfil").toString());
+                                    cuenta.put("Highest Score", puntuacion);
+                                    cuenta.put("UserName", doc.get("UserName").toString());
+
+                                    firestoreDB.collection("Cuentas")
+                                            .document(doc.get("AccountName").toString())
+                                            .set(cuenta);
+                                }
+                            }
                         }
                     }
                 });
