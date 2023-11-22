@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class game extends AppCompatActivity implements Runnable{
-    public static final int MAX_TIEMPO = 5;
+    public static final int MAX_TIEMPO = 15;
     private Thread hilo;
     public static boolean isOn = false;
     private TextView segundos;

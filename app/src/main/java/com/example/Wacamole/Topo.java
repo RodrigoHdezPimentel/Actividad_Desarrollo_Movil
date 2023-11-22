@@ -1,5 +1,6 @@
 package com.example.Wacamole;
 
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -20,15 +21,22 @@ public class Topo extends Thread {
 
     public void run() {
 
+        long last_time = System.nanoTime();
         while (game.isOn) {
+
             try {
                 Random rm = new Random();
-                Thread.sleep(700 + rm.nextInt(8000));
+                Thread.sleep(1100 + rm.nextInt(7000));
                 if(game.isOn) {
                     topo.startAnimation(appear);
                     topo.setEnabled(true);
                 }
-                Thread.sleep(100);
+                Thread.sleep(900);
+
+                long time = System.nanoTime();
+                int delta_time = (int) ((time - last_time) / 1000000);
+                last_time = time;
+                Log.d("Topo" + getId(), "Delta_Time " + last_time);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
