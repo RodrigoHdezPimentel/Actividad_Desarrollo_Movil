@@ -61,10 +61,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+
                         <LinearLayout
+                            android:id="@+id/columnUsuarios"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical" />
+                            android:orientation="vertical"
+                            >
+
+                                <TextView
+                                    android:layout_width="109dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="fffffffffffffffffffffffffffffffffffffffffffffffffffffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffsddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdddddddddddddsddddddddsdddddddddddddddddddddddsssssssssssssssssssssssdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        </LinearLayout>
+
+
                 </ScrollView>
         </FrameLayout>
 
@@ -75,8 +86,10 @@
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline49"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline50"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/backarrow" />
 
         <ImageView
@@ -152,6 +165,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.63" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/guideline50"
+            app:layout_constraintEnd_toStartOf="@+id/guideline56"
+            app:layout_constraintStart_toStartOf="@+id/guideline52"
+            app:layout_constraintTop_toTopOf="@+id/guideline55">
+        </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
