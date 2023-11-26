@@ -66,33 +66,57 @@
                             android:orientation="vertical">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/columasDatos"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:paddingTop="5dp"
                                     android:paddingBottom="5dp">
 
-                                        <TextView
-                                            android:id="@+id/textView3"
+                                           <TextView
+                                            android:id="@+id/usuario0"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:text="Nombre"
+                                            android:textAlignment="center"
                                             app:layout_constraintEnd_toStartOf="@+id/tablaLimit2.interno"
                                             app:layout_constraintStart_toStartOf="parent"
                                             tools:ignore="MissingConstraints" />
+                                        <TextView
+                                            android:id="@+id/usuario1"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="Nombre"
+                                            android:textAlignment="center"
+                                            app:layout_constraintTop_toBottomOf="@id/usuario0"
+                                            app:layout_constraintEnd_toStartOf="@+id/tablaLimit2.interno"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            tools:ignore="MissingConstraints" />
+
 
                                         <androidx.constraintlayout.widget.Guideline
                                             android:id="@+id/tablaLimit2.interno"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical"
-                                            app:layout_constraintGuide_percent="0.36" />
+                                            app:layout_constraintGuide_percent="0.33" />
 
                                         <TextView
-                                            android:id="@+id/textView6"
+                                            android:id="@+id/cuenta0"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:text="user"
+                                            android:text="cuenta"
+                                            android:textAlignment="center"
+                                            app:layout_constraintEnd_toStartOf="@+id/tablaLimit3.interno"
+                                            app:layout_constraintStart_toStartOf="@+id/tablaLimit2.interno"
+                                            tools:ignore="MissingConstraints" />
+                                        <TextView
+                                            android:id="@+id/cuenta1"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="cuenta"
+                                            android:textAlignment="center"
+                                            app:layout_constraintTop_toBottomOf="@id/cuenta0"
                                             app:layout_constraintEnd_toStartOf="@+id/tablaLimit3.interno"
                                             app:layout_constraintStart_toStartOf="@+id/tablaLimit2.interno"
                                             tools:ignore="MissingConstraints" />
@@ -102,16 +126,30 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical"
-                                            app:layout_constraintGuide_percent="0.69" />
+                                            app:layout_constraintGuide_percent="0.66" />
 
                                         <TextView
-                                            android:id="@+id/textView4"
+                                            android:id="@+id/puntaje0"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:text="Puntuacion"
+                                            android:textAlignment="center"
                                             app:layout_constraintEnd_toEndOf="parent"
-                                            app:layout_constraintStart_toEndOf="@+id/textView6"
+                                            app:layout_constraintHorizontal_bias="0.0"
+                                            app:layout_constraintStart_toEndOf="@+id/tablaLimit3.interno"
                                             tools:ignore="MissingConstraints" />
+                                        <TextView
+                                            android:id="@+id/puntaje1"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="Puntuacion"
+                                            android:textAlignment="center"
+                                            app:layout_constraintTop_toBottomOf="@id/puntaje0"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintHorizontal_bias="0.0"
+                                            app:layout_constraintStart_toEndOf="@+id/tablaLimit3.interno"
+                                            tools:ignore="MissingConstraints" />
+
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
