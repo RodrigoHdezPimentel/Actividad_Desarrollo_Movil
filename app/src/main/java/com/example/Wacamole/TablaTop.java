@@ -28,7 +28,7 @@ public class TablaTop extends AppCompatActivity {
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
     final int MAX_TOP = 10;
     ArrayList<String[]> cuentas = new ArrayList<String[]>();
-    ConstraintLayout filas;
+    LinearLayout filas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,29 +85,33 @@ public class TablaTop extends AppCompatActivity {
                     maxRegistros = cuentas.size();
                 }
 
-                //GuideLines
-                Guideline separador1 = findViewById(R.id.tablaLimit1);
-                Guideline separador2 = findViewById(R.id.tablaLimit2);
-                Guideline separador3 = findViewById(R.id.tablaLimit3);
-                Guideline separador4 = findViewById(R.id.tablaLimit4);
-
                 for (int i = 0; i < maxRegistros; i++) {
-                    
+                    ConstraintLayout column = new ConstraintLayout(TablaTop.this);
+                    ConstraintSet constraintSet = new ConstraintSet();
+                    constraintSet.clone(column);
+                    //GuideLines
+                    Guideline separador1 = new Guideline(TablaTop.this);    Guideline separador2 = new Guideline(TablaTop.this);
+                    column.addView(separador1);     column.addView(separador2);
+                    separador1.setGuidelinePercent(0.33f);     separador2.setGuidelinePercent(0.66f);
+
                     TextView TV_UserName = new TextView(TablaTop.this);      TV_UserName.setText(cuentas.get(i)[0]);
                     TextView TV_AccountName = new TextView(TablaTop.this);   TV_AccountName.setText(cuentas.get(i)[1]);
                     TextView TV_Score = new TextView(TablaTop.this);         TV_Score.setText(cuentas.get(i)[2]);
 
-                    filas.addView(TV_UserName);
-                    filas.addView(TV_AccountName);
-                    filas.addView(TV_Score);
-
-                    /*ConstraintSet constraintSet = new ConstraintSet();
-                    constraintSet.clone(filas);
+                    column.addView(TV_UserName);
+                    column.addView(TV_AccountName);
+                    column.addView(TV_Score);
 
                     // Si es el primer TextView, anclarlo al inicio del ConstraintLayout
-                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
-                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.START, separador1.getId(), ConstraintSet.END);
-                    constraintSet.connect(TV_Score.getId(), ConstraintSet.END, separador2.getId(), ConstraintSet.START);*/
+                    //                    Objetivo           Lado del objetivo     Enlace           lado del enlace
+                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.TOP, TV_Score.getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.START, column.getId(), ConstraintSet.START);
+                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.END, column.getId(), ConstraintSet.END);
+                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.BOTTOM, column.getId(), ConstraintSet.BOTTOM);
+
+                    // Aplica las restricciones al ConstraintLayout
+                    constraintSet.applyTo(column);
+                    filas.addView(column);
                 }
             }
         });

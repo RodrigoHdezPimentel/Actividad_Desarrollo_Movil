@@ -60,12 +60,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <LinearLayout
                             android:id="@+id/Filas"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
                 </ScrollView>
         </FrameLayout>
 
