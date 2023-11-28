@@ -51,6 +51,13 @@ public class game extends AppCompatActivity implements Runnable{
         ImageView game = findViewById(R.id.background);
         game.setAlpha(0.3f);
 
+        ImageView[] toperas = new ImageView[]{findViewById(R.id.topera1), findViewById(R.id.topera2), findViewById(R.id.topera3)
+                , findViewById(R.id.topera4), findViewById(R.id.topera5), findViewById(R.id.topera6)
+                , findViewById(R.id.topera7), findViewById(R.id.topera8), findViewById(R.id.topera9)};
+
+            for(ImageView topera: toperas){
+                topera.setVisibility(View.INVISIBLE);
+            }
 
         //Animaciones de aparecer y desaparecer
         disappear = AnimationUtils.loadAnimation(game.this, R.anim.disappeard);
@@ -60,17 +67,27 @@ public class game extends AppCompatActivity implements Runnable{
                 , findViewById(R.id.Topo4), findViewById(R.id.Topo5), findViewById(R.id.Topo6)
                 , findViewById(R.id.Topo7), findViewById(R.id.Topo8), findViewById(R.id.Topo9)};
 
+        //Array de kaboom
+        ImageView[] kaboom = new ImageView[]{findViewById(R.id.kaboom1), findViewById(R.id.kaboom2), findViewById(R.id.kaboom3)
+                , findViewById(R.id.kaboom4), findViewById(R.id.kaboom5), findViewById(R.id.kaboom6)
+                , findViewById(R.id.kaboom7), findViewById(R.id.kaboom8), findViewById(R.id.kaboom9)};
+
+
         //Contador de puntos
         TextView contador = findViewById(R.id.contador);
         contador.setText("0 0 0 0");
 
         //Escondemos los topos
-        for (ImageView topo: topos) {
+        for (int i = 0; i < topos.length; i++) {
+            ImageView topo = topos[i];
+            ImageView kabom = kaboom[i];
             topo.setVisibility(View.INVISIBLE);
+            kabom.setVisibility(View.INVISIBLE);
             topo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     puntuacion++;
+
                     if(puntuacion < 10){
                         contador.setText("0 0 0 " + puntuacion);
                     }else if(puntuacion < 100){
@@ -79,9 +96,15 @@ public class game extends AppCompatActivity implements Runnable{
                         contador.setText("0 " + String.valueOf(puntuacion).charAt(0) + " " + String.valueOf(puntuacion).charAt(1));
                     }
                     topo.setEnabled(false);
+                    kabom.setEnabled(false);
+                    kabom.startAnimation(disappear);
                     topo.startAnimation(disappear);
+
+
                 }
+
             });
+
         }
         //Cronometro
         segundos = findViewById(R.id.textViewSegundos);
@@ -94,6 +117,9 @@ public class game extends AppCompatActivity implements Runnable{
             public void onClick(View v) {
                 start.setVisibility(View.INVISIBLE);
                 game.setAlpha(1f);
+                for(ImageView topera: toperas){
+                    topera.setVisibility(View.VISIBLE);
+                }
                 //Restablecemos variables
                 contador.setText("0 0 0 0");
                 puntuacion = 0;
@@ -167,4 +193,5 @@ public class game extends AppCompatActivity implements Runnable{
             e.printStackTrace();
         }
     }
+
 }

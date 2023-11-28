@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class menu extends AppCompatActivity {
 String username;
     @Override
@@ -31,7 +36,20 @@ String username;
         Button Cuenta = findViewById(R.id.AcountBut);
         Button CerrarSesion = findViewById(R.id.cerrarSesion);
 
-        userTextname.setText(username);
+        FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+        firestoreDB.collection("Cuentas").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot list) {
+           for(QueryDocumentSnapshot document : list) {
+               if(document.get("CuentaPrincipal").toString().equals("true") && document.get("UserName").toString().equals(username)){
+                   userTextname.setText(document.get("AccountName").toString());
+                   break;
+               }
+
+                }
+            }
+        });
+
 
         //Boton a settings
         Ajustes.setVisibility(View.INVISIBLE);
@@ -88,6 +106,7 @@ String username;
                 profileimg.setAlpha(1f);
                 ImgFondo.setAlpha(1f);
                 ClickToStart.setAlpha(1f);
+                userTextname.setAlpha(1f);
                 profileimg.setEnabled(true);
             }
         });
@@ -105,6 +124,7 @@ String username;
                 profileimg.setAlpha(0.3f);
                 ImgFondo.setAlpha(0.3f);
                 ClickToStart.setAlpha(0.15f);
+                userTextname.setAlpha(0.3f);
                 profileimg.setEnabled(false);
             }
         });
