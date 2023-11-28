@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class TablaTop extends AppCompatActivity {
 
     public void ordenarPodio() {
         firestoreDB.collection("Cuentas").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
@@ -64,20 +66,20 @@ public class TablaTop extends AppCompatActivity {
                         for (int x = 0; x < cuentas.size(); x++) {
                             if (Integer.parseInt(doc.get("Highest Score").toString()) > Integer.parseInt(cuentas.get(x)[2])) {
                                 cuentas.add(x, new String[]{doc.get("UserName").toString(),
-                                                            doc.get("AccountName").toString(),
-                                                            doc.get("Highest Score").toString()});
+                                        doc.get("AccountName").toString(),
+                                        doc.get("Highest Score").toString()});
                                 break;
                             } else if (x == cuentas.size() - 1) {
                                 cuentas.add(new String[]{doc.get("UserName").toString(),
-                                                         doc.get("AccountName").toString(),
-                                                         doc.get("Highest Score").toString()});
+                                        doc.get("AccountName").toString(),
+                                        doc.get("Highest Score").toString()});
                                 break;
                             }
                         }
                     } else {
                         cuentas.add(new String[]{doc.get("UserName").toString(),
-                                                 doc.get("AccountName").toString(),
-                                                 doc.get("Highest Score").toString()});
+                                doc.get("AccountName").toString(),
+                                doc.get("Highest Score").toString()});
                     }
                 }
                 int maxRegistros = 25;
@@ -90,24 +92,44 @@ public class TablaTop extends AppCompatActivity {
                     ConstraintSet constraintSet = new ConstraintSet();
                     constraintSet.clone(column);
                     //GuideLines
-                    Guideline separador1 = new Guideline(TablaTop.this);    Guideline separador2 = new Guideline(TablaTop.this);
-                    column.addView(separador1);     column.addView(separador2);
-                    separador1.setGuidelinePercent(0.33f);     separador2.setGuidelinePercent(0.66f);
+                    Guideline separador1 = new Guideline(TablaTop.this);
+                    separador1.setId(View.generateViewId());
+                    constraintSet.setGuidelinePercent(separador1.getId(), 0.33f);
+                    column.addView(separador1);
 
-                    TextView TV_UserName = new TextView(TablaTop.this);      TV_UserName.setText(cuentas.get(i)[0]);
-                    TextView TV_AccountName = new TextView(TablaTop.this);   TV_AccountName.setText(cuentas.get(i)[1]);
-                    TextView TV_Score = new TextView(TablaTop.this);         TV_Score.setText(cuentas.get(i)[2]);
+                    Guideline separador2 = new Guideline(TablaTop.this);
+                    separador2.setId(View.generateViewId());
+                    constraintSet.setGuidelinePercent(separador2.getId(), 0.66f);
+                    column.addView(separador2);
 
+                    //TextView con el nombre de user
+                    TextView TV_UserName = new TextView(TablaTop.this);
+                    TV_UserName.setId(View.generateViewId());
+                    TV_UserName.setText(cuentas.get(i)[0]);
+                    TV_UserName.setBackgroundColor(R.color.md_theme_light_errorContainer);
                     column.addView(TV_UserName);
+
+                    //TextView con el nombre de Cuenta
+                    TextView TV_AccountName = new TextView(TablaTop.this);
+                    TV_AccountName.setId(View.generateViewId());
+                    TV_AccountName.setText(cuentas.get(i)[1]);
+                    TV_AccountName.setBackgroundColor(R.color.error);
                     column.addView(TV_AccountName);
+
+                    //TextView con el Max Score
+                    TextView TV_Score = new TextView(TablaTop.this);
+                    TV_Score.setId(View.generateViewId());
+                    TV_Score.setText(cuentas.get(i)[2]);
+                    TV_Score.setBackgroundColor(R.color.md_theme_dark_inverseOnSurface);
                     column.addView(TV_Score);
 
                     // Si es el primer TextView, anclarlo al inicio del ConstraintLayout
                     //                    Objetivo           Lado del objetivo     Enlace           lado del enlace
-                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.TOP, TV_Score.getId(), ConstraintSet.BOTTOM);
-                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.START, column.getId(), ConstraintSet.START);
-                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.END, column.getId(), ConstraintSet.END);
-                    constraintSet.connect(TV_UserName.getId(), ConstraintSet.BOTTOM, column.getId(), ConstraintSet.BOTTOM);
+                    /*constraintSet.connect(TV_UserName.getId(), ConstraintSet.END, separador1.getId(), ConstraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.START, separador1.getId(), ConstraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.END, separador2.getId(), ConstraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_Score.getId(), ConstraintSet.START, separador2.getId(), ConstraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_Score.getId(), ConstraintSet.START, separador2.getId(), ConstraintSet.VERTICAL_GUIDELINE);*/
 
                     // Aplica las restricciones al ConstraintLayout
                     constraintSet.applyTo(column);
