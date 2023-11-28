@@ -69,7 +69,7 @@ public class game extends AppCompatActivity implements Runnable{
 
         //Array de kaboom
         ImageView[] kaboom = new ImageView[]{findViewById(R.id.kaboom1), findViewById(R.id.kaboom2), findViewById(R.id.kaboom3)
-                , findViewById(R.id.kaboom4), findViewById(R.id.kaboom5), findViewById(R.id.kaboom6)
+                , findViewById(R.id.kaboom6), findViewById(R.id.kaboom5), findViewById(R.id.kaboom4)
                 , findViewById(R.id.kaboom7), findViewById(R.id.kaboom8), findViewById(R.id.kaboom9)};
 
 
@@ -85,7 +85,7 @@ public class game extends AppCompatActivity implements Runnable{
             kabom.setVisibility(View.INVISIBLE);
             topo.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public  void onClick(View v) {
                     puntuacion++;
 
                     if(puntuacion < 10){
