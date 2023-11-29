@@ -126,6 +126,7 @@ public class TablaTop extends AppCompatActivity {
                     TV_UserName.setId(View.generateViewId());
                     TV_UserName.setText(cuentas.get(i)[0]);
                     TV_UserName.setWidth(270);
+                    TV_UserName.setTextColor(R.color.black);
                     TV_UserName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     TV_UserName.setPadding(0, 25, 0, 25);
                     column.addView(TV_UserName);
@@ -136,6 +137,7 @@ public class TablaTop extends AppCompatActivity {
                     TV_AccountName.setText(cuentas.get(i)[1]);
                     TV_AccountName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     TV_AccountName.setWidth(600);
+                    TV_AccountName.setTextColor(R.color.black);
                     TV_AccountName.setPadding(270, 25, 0, 25);
                     column.addView(TV_AccountName);
 
@@ -143,6 +145,7 @@ public class TablaTop extends AppCompatActivity {
                     TextView TV_Score = new TextView(TablaTop.this);
                     TV_Score.setId(View.generateViewId());
                     TV_Score.setText(cuentas.get(i)[2]);
+                    TV_Score.setTextColor(R.color.black);
                     TV_Score.setWidth(860);
                     TV_Score.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     TV_Score.setPadding(600, 25, 0, 25);
