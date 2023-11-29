@@ -7,11 +7,17 @@ import androidx.constraintlayout.widget.Guideline;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,7 +64,7 @@ public class TablaTop extends AppCompatActivity {
 
     public void ordenarPodio() {
         firestoreDB.collection("Cuentas").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint({"ResourceAsColor", "ResourceType"})
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
@@ -106,35 +112,70 @@ public class TablaTop extends AppCompatActivity {
                     TextView TV_UserName = new TextView(TablaTop.this);
                     TV_UserName.setId(View.generateViewId());
                     TV_UserName.setText(cuentas.get(i)[0]);
-                    TV_UserName.setBackgroundColor(R.color.md_theme_light_errorContainer);
+                    TV_UserName.setWidth(270);
+                    TV_UserName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    TV_UserName.setPadding(0, 25, 0, 25);
                     column.addView(TV_UserName);
 
                     //TextView con el nombre de Cuenta
                     TextView TV_AccountName = new TextView(TablaTop.this);
                     TV_AccountName.setId(View.generateViewId());
                     TV_AccountName.setText(cuentas.get(i)[1]);
-                    TV_AccountName.setBackgroundColor(R.color.error);
+                    TV_AccountName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    TV_AccountName.setWidth(600);
+                    TV_AccountName.setPadding(300, 25, 0, 25);
                     column.addView(TV_AccountName);
 
                     //TextView con el Max Score
                     TextView TV_Score = new TextView(TablaTop.this);
                     TV_Score.setId(View.generateViewId());
                     TV_Score.setText(cuentas.get(i)[2]);
-                    TV_Score.setBackgroundColor(R.color.md_theme_dark_inverseOnSurface);
+                    TV_Score.setWidth(860);
+                    TV_Score.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    TV_Score.setPadding(600, 25, 0, 25);
                     column.addView(TV_Score);
+
+                    //AMrging entre registros
+                    ShapeDrawable backgroundDrawable = new ShapeDrawable(new RectShape());
+                    backgroundDrawable.getPaint().setColor(getResources().getColor(R.color.white));
+
+                    ShapeDrawable borderDrawable = new ShapeDrawable(new RectShape());
+                    borderDrawable.getPaint().setStrokeWidth(12f);
+                    borderDrawable.getPaint().setStyle(Paint.Style.STROKE);
+                    borderDrawable.getPaint().setColor(getResources().getColor(R.color.background_light_green));
+
+
+                    Drawable[] layers = {backgroundDrawable, borderDrawable};
+                    LayerDrawable layerDrawable = new LayerDrawable(layers);
+
+                    column.setBackground(layerDrawable);
+
+                    filas.addView(column);
+
+
 
                     // Si es el primer TextView, anclarlo al inicio del ConstraintLayout
                     //                    Objetivo           Lado del objetivo     Enlace           lado del enlace
-                    /*constraintSet.connect(TV_UserName.getId(), ConstraintSet.END, separador1.getId(), ConstraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.START, separador1.getId(), ConstraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.END, separador2.getId(), ConstraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_Score.getId(), ConstraintSet.START, separador2.getId(), ConstraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_Score.getId(), ConstraintSet.START, separador2.getId(), ConstraintSet.VERTICAL_GUIDELINE);*/
+                    /*constraintSet.connect(TV_UserName.getId(), ConstraintSet.START, column.getId(),constraintSet.START);
+                    constraintSet.connect(TV_UserName.getId(), constraintSet.END, separador1.getId(), constraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_UserName.getId(), constraintSet.TOP, column.getId(), constraintSet.TOP);
+                    constraintSet.connect(TV_UserName.getId(), constraintSet.BOTTOM, column.getId(), constraintSet.BOTTOM);
+
+                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.START, separador1.getId(),constraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_AccountName.getId(), constraintSet.END, separador2.getId(), constraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_AccountName.getId(), constraintSet.TOP, column.getId(), constraintSet.TOP);
+                    constraintSet.connect(TV_AccountName.getId(), constraintSet.BOTTOM, column.getId(), constraintSet.BOTTOM);
+
+                    constraintSet.connect(TV_Score.getId(), ConstraintSet.START, separador2.getId(),constraintSet.VERTICAL_GUIDELINE);
+                    constraintSet.connect(TV_Score.getId(), constraintSet.END, column.getId(), constraintSet.END);
+                    constraintSet.connect(TV_Score.getId(), constraintSet.TOP, column.getId(), constraintSet.TOP);
+                    constraintSet.connect(TV_Score.getId(), constraintSet.BOTTOM, column.getId(), constraintSet.BOTTOM);*/
 
                     // Aplica las restricciones al ConstraintLayout
                     constraintSet.applyTo(column);
-                    filas.addView(column);
                 }
+                filas.setPadding(14,7,14,7);
+
             }
         });
     }
