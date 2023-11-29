@@ -1,9 +1,11 @@
 package com.example.Wacamole;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,7 +80,26 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteUser();
+
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(User.this);
+                    alerta.setMessage("¿Deseas eleiminar el usuario?")
+                            .setCancelable(false)
+                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    deleteUser();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+                                }
+                            });
+                    AlertDialog title = alerta.create();
+                    title.show();
             }
         });
 
@@ -145,6 +166,7 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
         //ACÁ LE COLOCO DEBAJO DE LA FOTO DE PERFIL EL ACCOUNTNAME DE LA CUENTA PRINCIPAL DEL USER
         TextView AccounTextname = findViewById(R.id.AccountName);
+
         firestoreDB.collection("Cuentas")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -250,6 +272,5 @@ FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                     }
                 });
     }
-
 
 }
