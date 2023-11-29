@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class resultado extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado);
 
+        ImageView goTop = findViewById(R.id.goTablatop);
         Button play = findViewById(R.id.toGame);
         Button menu = findViewById(R.id.toMenu);
         TextView newBest = findViewById(R.id.newBest);
@@ -82,6 +84,15 @@ public class resultado extends AppCompatActivity {
                 toMenu.putExtra("Nombre", username);
                 startActivity(toMenu);
 
+            }
+        });
+
+        goTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toTabla = new Intent(resultado.this, TablaTop.class);
+                toTabla.putExtra("Nombre", username);
+                startActivity(toTabla);
             }
         });
     }
