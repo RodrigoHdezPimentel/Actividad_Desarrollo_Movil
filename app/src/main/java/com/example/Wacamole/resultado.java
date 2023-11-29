@@ -90,9 +90,9 @@ public class resultado extends AppCompatActivity {
         goTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent toTabla = new Intent(resultado.this, TablaTop.class);
-                //toTabla.putExtra("Nombre", username);
-                //startActivity(toTabla);
+                Intent toTabla = new Intent(resultado.this, TablaTop.class);
+                toTabla.putExtra("Nombre", username);
+                startActivity(toTabla);
             }
         });
     }

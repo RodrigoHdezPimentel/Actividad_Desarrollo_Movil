@@ -16,6 +16,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 public class TablaTop extends AppCompatActivity {
 
     FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+    String username = "";
     final int MAX_TOP = 10;
     ArrayList<String[]> cuentas = new ArrayList<String[]>();
     LinearLayout filas;
@@ -41,28 +43,39 @@ public class TablaTop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_top);
+
+        Intent llegadaUsername = getIntent();
+        username = llegadaUsername.getStringExtra("Nombre");
+
         ImageView flecha = findViewById(R.id.flecha);
         filas = findViewById(R.id.Filas);
 
+        ImageView refresh = findViewById(R.id.rankImage);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ordenarPodio();
+            }
+        });
+
         ordenarPodio();
-
-
-
-
 
         flecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goResultado = new Intent(TablaTop.this, MainActivity.class);
+                Intent goResultado = new Intent(TablaTop.this, menu.class);
+                goResultado.putExtra("Nombre", username);
                 startActivity(goResultado);
 
             }
         });
 
 
+
     }
 
     public void ordenarPodio() {
+        cuentas.removeAll(cuentas);
         firestoreDB.collection("Cuentas").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @SuppressLint({"ResourceAsColor", "ResourceType"})
             @Override
@@ -92,7 +105,7 @@ public class TablaTop extends AppCompatActivity {
                 if (cuentas.size() < 25) {
                     maxRegistros = cuentas.size();
                 }
-
+                filas.removeAllViews();
                 for (int i = 0; i < maxRegistros; i++) {
                     ConstraintLayout column = new ConstraintLayout(TablaTop.this);
                     ConstraintSet constraintSet = new ConstraintSet();
@@ -123,7 +136,7 @@ public class TablaTop extends AppCompatActivity {
                     TV_AccountName.setText(cuentas.get(i)[1]);
                     TV_AccountName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     TV_AccountName.setWidth(600);
-                    TV_AccountName.setPadding(300, 25, 0, 25);
+                    TV_AccountName.setPadding(270, 25, 0, 25);
                     column.addView(TV_AccountName);
 
                     //TextView con el Max Score
@@ -135,7 +148,7 @@ public class TablaTop extends AppCompatActivity {
                     TV_Score.setPadding(600, 25, 0, 25);
                     column.addView(TV_Score);
 
-                    //AMrging entre registros
+                    //Marging entre registros
                     ShapeDrawable backgroundDrawable = new ShapeDrawable(new RectShape());
                     backgroundDrawable.getPaint().setColor(getResources().getColor(R.color.white));
 
@@ -151,25 +164,6 @@ public class TablaTop extends AppCompatActivity {
                     column.setBackground(layerDrawable);
 
                     filas.addView(column);
-
-
-
-                    // Si es el primer TextView, anclarlo al inicio del ConstraintLayout
-                    //                    Objetivo           Lado del objetivo     Enlace           lado del enlace
-                    /*constraintSet.connect(TV_UserName.getId(), ConstraintSet.START, column.getId(),constraintSet.START);
-                    constraintSet.connect(TV_UserName.getId(), constraintSet.END, separador1.getId(), constraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_UserName.getId(), constraintSet.TOP, column.getId(), constraintSet.TOP);
-                    constraintSet.connect(TV_UserName.getId(), constraintSet.BOTTOM, column.getId(), constraintSet.BOTTOM);
-
-                    constraintSet.connect(TV_AccountName.getId(), ConstraintSet.START, separador1.getId(),constraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_AccountName.getId(), constraintSet.END, separador2.getId(), constraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_AccountName.getId(), constraintSet.TOP, column.getId(), constraintSet.TOP);
-                    constraintSet.connect(TV_AccountName.getId(), constraintSet.BOTTOM, column.getId(), constraintSet.BOTTOM);
-
-                    constraintSet.connect(TV_Score.getId(), ConstraintSet.START, separador2.getId(),constraintSet.VERTICAL_GUIDELINE);
-                    constraintSet.connect(TV_Score.getId(), constraintSet.END, column.getId(), constraintSet.END);
-                    constraintSet.connect(TV_Score.getId(), constraintSet.TOP, column.getId(), constraintSet.TOP);
-                    constraintSet.connect(TV_Score.getId(), constraintSet.BOTTOM, column.getId(), constraintSet.BOTTOM);*/
 
                     // Aplica las restricciones al ConstraintLayout
                     constraintSet.applyTo(column);

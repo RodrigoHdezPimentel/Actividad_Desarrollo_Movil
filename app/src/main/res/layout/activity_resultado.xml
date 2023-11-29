@@ -15,8 +15,10 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/gamebackground" />
 
     <Button
@@ -64,13 +66,12 @@
     <ImageView
         android:id="@+id/goTablatop"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/newBest"
         app:layout_constraintEnd_toStartOf="@+id/guideline60"
         app:layout_constraintStart_toStartOf="@+id/guideline59"
         app:layout_constraintTop_toTopOf="@+id/guideline58"
-        app:srcCompat="@drawable/borde_redondo" />
+        app:srcCompat="@drawable/clasificacion" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline58"
@@ -84,14 +85,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline60"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.65" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
