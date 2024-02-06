@@ -8,11 +8,11 @@ Esta app creada con android studio en java, fue un proyecto del modulo de DAM.
 - Registro global de marcador.
 ## Main Activities
 ### Registro
-   <img src= "https://github.com/RodrigoHdezPimentel/Actividad_Desarrollo_Movil/blob/main/app/src/main/res/drawable/MainActivity.png">
+   <img src= "https://github.com/RodrigoHdezPimentel/Actividad_Desarrollo_Movil/blob/main/app/src/main/res/drawable/MainActivity.png">\n
 ### Juego
-   <img src= "https://github.com/RodrigoHdezPimentel/Actividad_Desarrollo_Movil/blob/main/app/src/main/res/drawable/GameActivity.png">
+   <img src= "https://github.com/RodrigoHdezPimentel/Actividad_Desarrollo_Movil/blob/main/app/src/main/res/drawable/GameActivity.png">\n
 ### Podio
-   <img src= "https://github.com/RodrigoHdezPimentel/Actividad_Desarrollo_Movil/blob/main/app/src/main/res/drawable/PodioActivity.png">
+   <img src= "https://github.com/RodrigoHdezPimentel/Actividad_Desarrollo_Movil/blob/main/app/src/main/res/drawable/PodioActivity.png">\n
 ## Base de datos
 La base de datos en firebase tiene un modelo muy sencillo. Hay un documento con los usuarios, con su id, nombre y contraseña y otro con las cuentas, donde se relacciona el id prodramáticamente para conseguir que un usuario tenga varias cuentas.\n
 ## Diseño
